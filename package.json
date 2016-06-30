@@ -1,0 +1,50 @@
+{
+  "name": "meca-auto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build-css && node ./node_modules/babel-cli/bin/babel.js src/server --out-dir build && webpack",
+    "build-css": "sass src/style/sass/style.scss ./src/style/built-stylesheet.css",
+    "start": "node build/server.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muskacirca/meca-auto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/muskacirca/meca-auto/issues"
+  },
+  "homepage": "https://github.com/muskacirca/meca-auto#readme",
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-core": "^6.4.5",
+    "babel-jest": "^9.0.3",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "bootstrap-validator": "^0.10.2",
+    "classnames": "^2.2.5",
+    "fs": "0.0.2",
+    "jest-cli": "^13.0.0",
+    "json": "^9.0.3",
+    "json-loader": "^0.5.4",
+    "lodash": "^4.13.1",
+    "moment": "^2.11.2",
+    "nodemon": "^1.9.2",
+    "react-autosuggest": "^3.5.0",
+    "source-map-support": "^0.4.0",
+    "webpack": "^1.12.13"
+  },
+  "dependencies": {
+    "axios": "^0.9.1",
+    "express": "^4.14.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.5.0"
+  }
+}
