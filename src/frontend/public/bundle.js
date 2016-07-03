@@ -26019,10 +26019,32 @@
 	    }
 
 	    _createClass(MainApp, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.addEventListener('scroll', this.handleScroll);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            window.removeEventListener('scroll', this.handleScroll);
+	        }
+	    }, {
 	        key: 'onHiddenSiteCLick',
 	        value: function onHiddenSiteCLick() {
 	            var className = 'with--sidebar';
 	            (0, _utils.toggleClassInBody)(className);
+	        }
+	    }, {
+	        key: 'handleScroll',
+	        value: function handleScroll(e) {
+	            console.log("hello");
+
+	            // this.refs.nav.getDOMNode().style.top =
+	            var scrollTop = e.srcElement.body.scrollTop,
+	                itemTranslate = Math.min(0, scrollTop / 3 - 60);
+
+	            console.log("scrollingg height " + scrollTop);
+	            console.log("scrollingg itemTranslate " + itemTranslate);
 	        }
 	    }, {
 	        key: 'render',
@@ -26031,6 +26053,11 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'site-pusher' },
+	                _react2.default.createElement(
+	                    'h1',
+	                    { id: 'logo-row' },
+	                    'Méca Pièces Auto'
+	                ),
 	                _react2.default.createElement(_navbar2.default, null),
 	                _react2.default.createElement(
 	                    'div',
@@ -26120,11 +26147,6 @@
 	                { className: 'header' },
 	                _react2.default.createElement('a', _defineProperty({ href: '#', className: 'header__icon', id: 'header__icon',
 	                    onClick: this.handleClick.bind(this) }, 'href', '#')),
-	                _react2.default.createElement(
-	                    'a',
-	                    _defineProperty({ href: '#', className: 'header__logo link-active' }, 'href', '#'),
-	                    'Méca Pièces Auto'
-	                ),
 	                _react2.default.createElement(
 	                    'nav',
 	                    { className: 'menu' },

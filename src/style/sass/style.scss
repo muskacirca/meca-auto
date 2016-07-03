@@ -7,14 +7,46 @@ $button-height: 34px;
 
 $navbar-height: 66px;
 
+html, body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+  height: 100%;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  height: 100%;
+}
+
 /*
   MAIN
 */
 
+#logo-row {
+  margin: 0;
+  padding-bottom: 0.1em;
+  height: 150px;
+}
+
+.site-content {
+  //position: absolute;
+  top: 66px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding-top: 0;
+  -webkit-overflow-scrolling: touch;
+  line-height: 25em;
+  /*overflow: hidden;*/
+}
+
 .site-container {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  //overflow: auto;
 }
 
 .div1 {
@@ -48,8 +80,142 @@ $navbar-height: 66px;
   display: inline-block;
 }
 
-.hide {
-  display: none;
+
+/*
+    NAVBAR
+*/
+
+.header {
+  position: static;
+  left: 0;
+  right: 0;
+  height: 66px;
+
+  line-height: 66px;
+
+  color: #FFF;
+  background-color: #333;
+}
+
+.header__logo {
+  color: #D32F2F;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 0 25px;
+  float: left;
+}
+
+.header__logo a {
+  text-decoration: none;
+  color: #9d9d9d;
+}
+
+.menu {
+  float: left;
+}
+
+.menu-right a,
+.menu a {
+  padding: 0 10px;
+  text-decoration: none;
+  color: #9d9d9d;
+}
+
+.menu-right a:hover,
+.menu a:hover {
+  color: whitesmoke;
+}
+
+.menu-right {
+  float: right;
+  padding-right: 20px;
+}
+
+/*
+    RESPONSIVE
+*/
+
+@media only screen and (max-width: 750px) {
+
+  .header {position: static;}
+  .site-content {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding-top: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+  .site-pusher {
+    height: 100%;
+    transition-duration: 0.3s;
+    transform: translateX(0px);
+  }
+
+  .header__icon {
+    position: relative;
+    display: block;
+    float: left;
+
+    cursor: pointer;
+
+    width: 50px;
+    height: 66px;
+  }
+
+  .header__icon:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 16px;
+    height: 0px;
+    top: 16px;
+    left: 15px;
+    box-shadow: 0 10px 0 1px white, 0 16px 0 1px white, 0 22px 0 1px white;
+  }
+
+  .menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    background-color: #333;
+
+    width: 250px;
+    z-index: 10;
+
+    transform : translateX(-250px);
+  }
+
+  .menu a {
+    display: block;
+    height: 40px;
+
+    text-align: center;
+    text-decoration: none;
+    line-height: 40px;
+
+    border-bottom: 1px solid whitesmoke;
+  }
+
+  .with--sidebar .site-pusher {
+    transform : translateX(250px);
+  }
+
+  .with--sidebar .site-cache {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right:  0;
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  .mobile-hide{ display: none; }
 }
 
 /*
@@ -289,4 +455,12 @@ $navbar-height: 66px;
 
 .comment-box {
   resize: none;
+}
+
+/*
+  UTILS
+*/
+
+.hide {
+  display: none;
 }

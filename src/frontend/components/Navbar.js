@@ -40,10 +40,6 @@ class NavBarBox extends React.Component {
                     <a href="#" className="header__icon" id="header__icon"
                        onClick={this.handleClick.bind(this)} href="#">
                     </a>
-
-                    <a href="#" className="header__logo link-active" href="#">
-                        Méca Pièces Auto
-                    </a>
                     <nav className="menu">
                         <Link to="/shops" activeClassName="link-active" onClick={this.safehandleClick.bind(this)}>
                             Réparations
