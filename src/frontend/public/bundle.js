@@ -26015,13 +26015,18 @@
 	    function MainApp(props) {
 	        _classCallCheck(this, MainApp);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(MainApp).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MainApp).call(this, props));
+
+	        _this.state = {
+	            isNavbarFixed: false
+	        };
+	        return _this;
 	    }
 
 	    _createClass(MainApp, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            window.addEventListener('scroll', this.handleScroll);
+	            window.addEventListener('scroll', this.handleScroll.bind(this));
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
@@ -26037,18 +26042,24 @@
 	    }, {
 	        key: 'handleScroll',
 	        value: function handleScroll(e) {
-	            console.log("hello");
 
 	            // this.refs.nav.getDOMNode().style.top =
-	            var scrollTop = e.srcElement.body.scrollTop,
-	                itemTranslate = Math.min(0, scrollTop / 3 - 60);
+	            var scrollTop = e.srcElement.body.scrollTop;
+	            // itemTranslate = Math.min(0, scrollTop/3 - 60);
 
-	            console.log("scrollingg height " + scrollTop);
-	            console.log("scrollingg itemTranslate " + itemTranslate);
+	            if (scrollTop > 151) {
+	                console.log("scrollingg height " + scrollTop);
+	                this.setState({ isNavbarFixed: true });
+	            } else if (scrollTop < 151) {
+	                this.setState({ isNavbarFixed: false });
+	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+
+	            var yo = "";
+	            if (this.state.isNavbarFixed) yo = "fixed";
 
 	            return _react2.default.createElement(
 	                'div',
@@ -26058,7 +26069,7 @@
 	                    { id: 'logo-row' },
 	                    'Méca Pièces Auto'
 	                ),
-	                _react2.default.createElement(_navbar2.default, null),
+	                _react2.default.createElement(_navbar2.default, { fix: yo }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'site-content' },
@@ -26144,7 +26155,7 @@
 
 	            return _react2.default.createElement(
 	                'header',
-	                { className: 'header' },
+	                { className: "header " + this.props.fix },
 	                _react2.default.createElement('a', _defineProperty({ href: '#', className: 'header__icon', id: 'header__icon',
 	                    onClick: this.handleClick.bind(this) }, 'href', '#')),
 	                _react2.default.createElement(

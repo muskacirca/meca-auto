@@ -36,7 +36,7 @@ class NavBarBox extends React.Component {
         
         // var userMenuStyle = this.state.isUserMenuOpened ? {display: "block"} : {}
         
-        return  <header className="header">
+        return  <header className={"header " + this.props.fix}>
                     <a href="#" className="header__icon" id="header__icon"
                        onClick={this.handleClick.bind(this)} href="#">
                     </a>

@@ -11,10 +11,13 @@ class MainApp extends React.Component{
 
     constructor(props) {
         super(props);
+        this.state = {
+            isNavbarFixed: false
+        }
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', this.handleScroll.bind(this));
     }
 
     componentWillUnmount() {
@@ -28,22 +31,31 @@ class MainApp extends React.Component{
     }
 
     handleScroll(e) {
-        console.log("hello");
         
         // this.refs.nav.getDOMNode().style.top =
-        let scrollTop = e.srcElement.body.scrollTop,
-            itemTranslate = Math.min(0, scrollTop/3 - 60);
+        let scrollTop = e.srcElement.body.scrollTop;
+            // itemTranslate = Math.min(0, scrollTop/3 - 60);
 
-        console.log("scrollingg height " + scrollTop);
-        console.log("scrollingg itemTranslate " + itemTranslate);
+
+        if(scrollTop > 151) {
+            console.log("scrollingg height " + scrollTop);
+            this.setState({isNavbarFixed: true})
+        } else if(scrollTop < 151) {
+            this.setState({isNavbarFixed: false})
+        }
+
+       
     }
 
     render() {
+        
+        let yo = "";
+        if(this.state.isNavbarFixed) yo = "fixed"
 
         return (
             <div className="site-pusher">
                 <h1 id="logo-row">Méca Pièces Auto</h1>
-                <NavBar />
+                <NavBar fix={yo}/>
 
                 <div className="site-content">
                     {this.props.children}
