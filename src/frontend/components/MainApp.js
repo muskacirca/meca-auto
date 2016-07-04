@@ -32,19 +32,14 @@ class MainApp extends React.Component{
 
     handleScroll(e) {
         
-        // this.refs.nav.getDOMNode().style.top =
         let scrollTop = e.srcElement.body.scrollTop;
-            // itemTranslate = Math.min(0, scrollTop/3 - 60);
-
-
+        
         if(scrollTop > 151) {
-            console.log("scrollingg height " + scrollTop);
+            // console.log("scrollingg height " + scrollTop);
             this.setState({isNavbarFixed: true})
         } else if(scrollTop < 151) {
             this.setState({isNavbarFixed: false})
         }
-
-       
     }
 
     render() {
