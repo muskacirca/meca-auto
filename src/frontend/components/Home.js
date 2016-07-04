@@ -10,7 +10,7 @@ class Home extends React.Component {
 
     render() {
         return  <div className="site-container">
-                    <div className="div1 row">
+                    <div id="repair" className="div1 row anchor">
                         <div className="col-md-6 img-presentation">
                             
                         </div>
@@ -22,7 +22,7 @@ class Home extends React.Component {
                             <p>Nous sommes disponible et à votre écoute pour toutes demandes de diagnostic sur votre véhicule ou renseignements complémentaires concernant une intervention de réparation sur votre automobile.</p>
                         </div>
                     </div>
-                    <div className="div2">
+                    <div id="care" className="div2 row anchor">
                         <div className="col-md-6">
                             <h1>Entretien</h1>
                             <p>Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.</p>
@@ -33,7 +33,7 @@ class Home extends React.Component {
                         <div className="col-md-6 img-presentation">
                         </div>
                     </div>
-                    <div className="div3">
+                    <div id="stock" className="div3 row anchor">
                         <div className="col-md-6 img-presentation">
                         </div>
                         <div className="col-md-6">

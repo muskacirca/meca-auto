@@ -26065,11 +26065,15 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { id: 'logo-row' },
-	                    _react2.default.createElement('img', { src: 'style/images/mpa/mpa-logo.png', className: 'img-responsive' }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        'Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY'
+	                        'div',
+	                        { className: 'col-md-6 col-md-offset-3 center' },
+	                        _react2.default.createElement('img', { src: 'style/images/mpa/mpa-logo.png', className: 'img-responsive' }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY'
+	                        )
 	                    )
 	                ),
 	                _react2.default.createElement(_navbar2.default, { fix: yo }),
@@ -26165,18 +26169,18 @@
 	                    'nav',
 	                    { className: 'menu' },
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/shops', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
+	                        'a',
+	                        { href: '#repair', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
 	                        'Réparations'
 	                    ),
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/shops', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
+	                        'a',
+	                        { className: 'anchor', href: '#care', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
 	                        'Entretiens'
 	                    ),
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/shops', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
+	                        'a',
+	                        { className: 'anchor', href: '#stock', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
 	                        'Ventes pieces détachées'
 	                    )
 	                )
@@ -42725,7 +42729,7 @@
 	                { className: 'site-container' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'div1 row' },
+	                    { id: 'repair', className: 'div1 row anchor' },
 	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' }),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42759,7 +42763,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'div2' },
+	                    { id: 'care', className: 'div2 row anchor' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'col-md-6' },
@@ -42793,7 +42797,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'div3' },
+	                    { id: 'stock', className: 'div3 row anchor' },
 	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' }),
 	                    _react2.default.createElement(
 	                        'div',

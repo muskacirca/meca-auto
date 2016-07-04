@@ -44,6 +44,9 @@ html, body {
 .div3 .img-presentation {
   background-image: url("../style/images/mpa/stock-logo.png"); }
 
+img.img-responsive {
+  margin: 0 auto; }
+
 .page-content {
   padding-top: 10px;
   margin-right: 10px;
@@ -78,7 +81,8 @@ header.header.fixed {
   height: 66px;
   line-height: 66px;
   color: #FFF;
-  background-color: #333; }
+  background-color: #333;
+  z-index: 10; }
 
 .header__logo {
   color: #D32F2F;

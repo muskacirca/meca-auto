@@ -25,7 +25,7 @@ class MainApp extends React.Component{
     }
 
     onHiddenSiteCLick() {
-        var className = 'with--sidebar'
+        let className = 'with--sidebar'
         toggleClassInBody(className)
 
     }
@@ -50,8 +50,10 @@ class MainApp extends React.Component{
         return (
             <div className="site-pusher">
                 <div id="logo-row">
-                    <img src="style/images/mpa/mpa-logo.png" className="img-responsive" />
-                    <span>Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY</span>
+                    <div className="col-md-6 col-md-offset-3 center">
+                        <img src="style/images/mpa/mpa-logo.png" className="img-responsive" />
+                        <span>Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY</span>
+                    </div>
                 </div>
                 <NavBar fix={yo}/>
 

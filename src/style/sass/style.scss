@@ -61,26 +61,24 @@ html, body {
   .img-presentation {
     background-image: url("../style/images/mpa/repair-band.jpg");
   }
-
 }
-
 
 .div2 {
 
   .img-presentation {
     background-image: url("../style/images/mpa/care-logo.jpg");
   }
-
 }
 
 .div3 {
   .img-presentation {
     background-image: url("../style/images/mpa/stock-logo.png");
   }
-
-
 }
 
+img.img-responsive {
+  margin: 0 auto;
+}
 
 .page-content {
   padding-top: 10px;
@@ -99,6 +97,7 @@ html, body {
   margin-right: 5px;
   display: inline-block;
 }
+
 
 
 /*
@@ -126,6 +125,7 @@ header.header.fixed {
   line-height: 66px;
   color: #FFF;
   background-color: #333;
+  z-index: 10;
 }
 
 .header__logo {
@@ -494,4 +494,8 @@ header.header.fixed {
 
 .hide {
   display: none;
+}
+
+.anchor {
+  //padding-top: 90px;
 }
