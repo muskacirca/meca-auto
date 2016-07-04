@@ -31,9 +31,9 @@ class MainApp extends React.Component{
     }
 
     handleScroll(e) {
-        
+
         let scrollTop = e.srcElement.body.scrollTop;
-        
+
         if(scrollTop > 151) {
             // console.log("scrollingg height " + scrollTop);
             this.setState({isNavbarFixed: true})
@@ -43,13 +43,16 @@ class MainApp extends React.Component{
     }
 
     render() {
-        
+
         let yo = "";
         if(this.state.isNavbarFixed) yo = "fixed"
 
         return (
             <div className="site-pusher">
-                <h1 id="logo-row">Méca Pièces Auto</h1>
+                <div id="logo-row">
+                    <img src="style/images/mpa/mpa-logo.png" className="img-responsive" />
+                    <span>Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY</span>
+                </div>
                 <NavBar fix={yo}/>
 
                 <div className="site-content">

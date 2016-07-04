@@ -7,6 +7,8 @@ $button-height: 34px;
 
 $navbar-height: 66px;
 
+$mpa-orange: #FD924E;
+
 html, body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   line-height: 1.4;
@@ -39,7 +41,6 @@ html, body {
   bottom: 0;
   padding-top: 0;
   -webkit-overflow-scrolling: touch;
-  line-height: 25em;
   /*overflow: hidden;*/
 }
 
@@ -49,18 +50,37 @@ html, body {
   //overflow: auto;
 }
 
+.img-presentation {
+  background-repeat: no-repeat;
+  height: 500px;
+  position: static;
+}
+
 .div1 {
-  background-color: red;
+
+  .img-presentation {
+    background-image: url("../style/images/mpa/repair-band.jpg");
+  }
+
 }
 
 
 .div2 {
-  background-color: mediumspringgreen;
+
+  .img-presentation {
+    background-image: url("../style/images/mpa/care-logo.jpg");
+  }
+
 }
 
 .div3 {
-  background-color: indigo;
+  .img-presentation {
+    background-image: url("../style/images/mpa/stock-logo.png");
+  }
+
+
 }
+
 
 .page-content {
   padding-top: 10px;

@@ -24,21 +24,25 @@ html, body {
   bottom: 0;
   padding-top: 0;
   -webkit-overflow-scrolling: touch;
-  line-height: 25em;
   /*overflow: hidden;*/ }
 
 .site-container {
   display: flex;
   flex-direction: column; }
 
-.div1 {
-  background-color: red; }
+.img-presentation {
+  background-repeat: no-repeat;
+  height: 500px;
+  position: static; }
 
-.div2 {
-  background-color: mediumspringgreen; }
+.div1 .img-presentation {
+  background-image: url("../style/images/mpa/repair-band.jpg"); }
 
-.div3 {
-  background-color: indigo; }
+.div2 .img-presentation {
+  background-image: url("../style/images/mpa/care-logo.jpg"); }
+
+.div3 .img-presentation {
+  background-image: url("../style/images/mpa/stock-logo.png"); }
 
 .page-content {
   padding-top: 10px;

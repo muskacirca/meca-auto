@@ -26043,12 +26043,10 @@
 	        key: 'handleScroll',
 	        value: function handleScroll(e) {
 
-	            // this.refs.nav.getDOMNode().style.top =
 	            var scrollTop = e.srcElement.body.scrollTop;
-	            // itemTranslate = Math.min(0, scrollTop/3 - 60);
 
 	            if (scrollTop > 151) {
-	                console.log("scrollingg height " + scrollTop);
+	                // console.log("scrollingg height " + scrollTop);
 	                this.setState({ isNavbarFixed: true });
 	            } else if (scrollTop < 151) {
 	                this.setState({ isNavbarFixed: false });
@@ -26065,9 +26063,14 @@
 	                'div',
 	                { className: 'site-pusher' },
 	                _react2.default.createElement(
-	                    'h1',
+	                    'div',
 	                    { id: 'logo-row' },
-	                    'Méca Pièces Auto'
+	                    _react2.default.createElement('img', { src: 'style/images/mpa/mpa-logo.png', className: 'img-responsive' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        'Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY'
+	                    )
 	                ),
 	                _react2.default.createElement(_navbar2.default, { fix: yo }),
 	                _react2.default.createElement(
@@ -42722,18 +42725,105 @@
 	                { className: 'site-container' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'div1' },
-	                    'Yo'
+	                    { className: 'div1 row' },
+	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-md-6' },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            'Réparation'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nos mécaniciens, spécialisés en réparation automobile, bénéficient d’un large savoir-faire offrant à nos clients une intervention de qualité sur leur véhicule.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nous vous accompagnons à travers une qualité de service ainsi que par une prise en charge rapide de votre véhicule.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nous sommes disponible et à votre écoute pour toutes demandes de diagnostic sur votre véhicule ou renseignements complémentaires concernant une intervention de réparation sur votre automobile.'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'div2' },
-	                    'Ca roule ?'
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-md-6' },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            'Entretien'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nos mécaniciens, spécialisés en réparation automobile, bénéficient d’un large savoir-faire offrant à nos clients une intervention de qualité sur leur véhicule.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nous vous accompagnons à travers une qualité de service ainsi que par une prise en charge rapide de votre véhicule.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nous sommes disponible et à votre écoute pour toutes demandes de diagnostic sur votre véhicule ou renseignements complémentaires concernant une intervention de réparation sur votre automobile.'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'div3' },
-	                    'Ouuuuaiis'
+	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-md-6' },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            'Ventes de pièces détachées'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nos mécaniciens, spécialisés en réparation automobile, bénéficient d’un large savoir-faire offrant à nos clients une intervention de qualité sur leur véhicule.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nous vous accompagnons à travers une qualité de service ainsi que par une prise en charge rapide de votre véhicule.'
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Nous sommes disponible et à votre écoute pour toutes demandes de diagnostic sur votre véhicule ou renseignements complémentaires concernant une intervention de réparation sur votre automobile.'
+	                        )
+	                    )
 	                )
 	            );
 	        }
