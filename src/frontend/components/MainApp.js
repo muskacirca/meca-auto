@@ -33,7 +33,7 @@ class MainApp extends React.Component{
     handleScroll(e) {
 
         
-        let scrollTop = /*e.srcElement.body.scrollTop ||*/ window.scrollY;
+        let scrollTop = /* work on Chrome and Firefox */ window.scrollY;
 
         if(scrollTop > 151) {
             // console.log("scrollingg height " + scrollTop);
