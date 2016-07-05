@@ -14,7 +14,7 @@ class Home extends React.Component {
                         <div className="col-md-6 img-presentation">
                             
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 text-presentation __right">
                             <h1>Réparation</h1>
                             <p>Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.</p>
                             <p>Nos mécaniciens, spécialisés en réparation automobile, bénéficient d’un large savoir-faire offrant à nos clients une intervention de qualité sur leur véhicule.</p>
@@ -23,7 +23,7 @@ class Home extends React.Component {
                         </div>
                     </div>
                     <div id="care" className="div2 row anchor">
-                        <div className="col-md-6">
+                        <div className="col-md-6 text-presentation __left">
                             <h1>Entretien</h1>
                             <p>Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.</p>
                             <p>Nos mécaniciens, spécialisés en réparation automobile, bénéficient d’un large savoir-faire offrant à nos clients une intervention de qualité sur leur véhicule.</p>
@@ -36,7 +36,7 @@ class Home extends React.Component {
                     <div id="stock" className="div3 row anchor">
                         <div className="col-md-6 img-presentation">
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 text-presentation __right">
                             <h1>Ventes de pièces détachées</h1>
                             <p>Meca Pièces Auto vous accueille dans son centre auto situé à Pringy.</p>
                             <p>Nos mécaniciens, spécialisés en réparation automobile, bénéficient d’un large savoir-faire offrant à nos clients une intervention de qualité sur leur véhicule.</p>

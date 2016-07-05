@@ -35,6 +35,16 @@ html, body {
   height: 500px;
   position: static; }
 
+.text-presentation {
+  padding-top: 110px; }
+
+.__right {
+  padding-right: 15em; }
+
+.__left {
+  padding-left: 10em;
+  padding-right: 10em; }
+
 .div1 .img-presentation {
   background-image: url("../style/images/mpa/repair-band.jpg"); }
 

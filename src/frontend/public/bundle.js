@@ -67,7 +67,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _history = __webpack_require__(238);
+	var _history = __webpack_require__(239);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25967,6 +25967,10 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
+	var _Contact = __webpack_require__(238);
+
+	var _Contact2 = _interopRequireDefault(_Contact);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createElement(
@@ -25975,7 +25979,11 @@
 	    _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/', component: _MainApp2.default },
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/contact', component: _Contact2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/repair', component: _Home2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/care', component: _Home2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/stock', component: _Home2.default })
 	    )
 	);
 
@@ -26043,7 +26051,7 @@
 	        key: 'handleScroll',
 	        value: function handleScroll(e) {
 
-	            var scrollTop = e.srcElement.body.scrollTop;
+	            var scrollTop = /*e.srcElement.body.scrollTop ||*/window.scrollY;
 
 	            if (scrollTop > 151) {
 	                // console.log("scrollingg height " + scrollTop);
@@ -26182,6 +26190,11 @@
 	                        'a',
 	                        { className: 'anchor', href: '#stock', activeClassName: 'link-active', onClick: this.safehandleClick.bind(this) },
 	                        'Ventes pieces détachées'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/contact', activeClassName: 'link-active' },
+	                        'Contact et Plans d\'accès'
 	                    )
 	                )
 	            );
@@ -42733,7 +42746,7 @@
 	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-md-6' },
+	                        { className: 'col-md-6 text-presentation __right' },
 	                        _react2.default.createElement(
 	                            'h1',
 	                            null,
@@ -42766,7 +42779,7 @@
 	                    { id: 'care', className: 'div2 row anchor' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-md-6' },
+	                        { className: 'col-md-6 text-presentation __left' },
 	                        _react2.default.createElement(
 	                            'h1',
 	                            null,
@@ -42801,7 +42814,7 @@
 	                    _react2.default.createElement('div', { className: 'col-md-6 img-presentation' }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-md-6' },
+	                        { className: 'col-md-6 text-presentation __right' },
 	                        _react2.default.createElement(
 	                            'h1',
 	                            null,
@@ -42844,6 +42857,82 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Contact = function (_React$Component) {
+	    _inherits(Contact, _React$Component);
+
+	    function Contact(props) {
+	        _classCallCheck(this, Contact);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Contact).call(this, props));
+	    }
+
+	    _createClass(Contact, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true' }),
+	                ' 39 avenue de Fontainebleau 77310 PRINGY',
+	                _react2.default.createElement('i', { className: 'fa fa-phone', 'aria-hidden': 'true' }),
+	                '01 64 41 80 97',
+	                _react2.default.createElement('i', { className: 'fa fa-fax', 'aria-hidden': 'true' }),
+	                '01 43 76 91 72',
+	                _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' }),
+	                'Nos Horaires d’Ouvertures :',
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'Du Lundi au Vendredi :'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '8h30 – 12h30  /  13h30 – 18h30'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'Samedi :'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '9h00 – 13h00'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Contact;
+	}(_react2.default.Component);
+
+	exports.default = Contact;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	exports.__esModule = true;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -42880,7 +42969,7 @@
 
 	exports.useBasename = _useBasename3['default'];
 
-	var _useBeforeUnload2 = __webpack_require__(239);
+	var _useBeforeUnload2 = __webpack_require__(240);
 
 	var _useBeforeUnload3 = _interopRequireDefault(_useBeforeUnload2);
 
@@ -42900,13 +42989,13 @@
 
 	// deprecated
 
-	var _enableBeforeUnload2 = __webpack_require__(240);
+	var _enableBeforeUnload2 = __webpack_require__(241);
 
 	var _enableBeforeUnload3 = _interopRequireDefault(_enableBeforeUnload2);
 
 	exports.enableBeforeUnload = _enableBeforeUnload3['default'];
 
-	var _enableQueries2 = __webpack_require__(241);
+	var _enableQueries2 = __webpack_require__(242);
 
 	var _enableQueries3 = _interopRequireDefault(_enableQueries2);
 
@@ -42915,7 +43004,7 @@
 	exports.createLocation = createLocation;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -43032,7 +43121,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43045,7 +43134,7 @@
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
-	var _useBeforeUnload = __webpack_require__(239);
+	var _useBeforeUnload = __webpack_require__(240);
 
 	var _useBeforeUnload2 = _interopRequireDefault(_useBeforeUnload);
 
@@ -43053,7 +43142,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
