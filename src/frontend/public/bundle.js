@@ -42886,10 +42886,32 @@
 	    function Contact(props) {
 	        _classCallCheck(this, Contact);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Contact).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Contact).call(this, props));
+
+	        _this.state = {
+	            customerAddress: ""
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Contact, [{
+	        key: 'handleSearch',
+	        value: function handleSearch(e) {
+	            e.preventDefault();
+	            this.setState({ customerAddress: this.refs.addressField.value });
+	        }
+	    }, {
+	        key: 'submit',
+	        value: function submit(customerAddress) {}
+	    }, {
+	        key: 'handlePressEnter',
+	        value: function handlePressEnter(e) {
+	            if (e.keyCode === 13 && this.state.customerAddress != "") {
+	                console.log("this.refs.addressField.value : " + JSON.stringify(this.refs.addressField.value));
+	                this.submit(this.state.customerAddress);
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -42898,9 +42920,28 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'floating-panel' },
-	                    _react2.default.createElement('input', { className: 'form-control', placeholder: 'Enter your address ...' })
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement('input', { id: 'addressField',
+	                            ref: 'addressField',
+	                            type: 'text',
+	                            className: 'form-control',
+	                            placeholder: 'Enter your address ...',
+	                            'aria-describedby': 'basic-addon1',
+	                            onKeyDown: this.handlePressEnter.bind(this) }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'input-group-btn', 'aria-hidden': 'true', id: 'basic-addon1' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { className: 'btn btn-default', type: 'button', onClick: this.handleSearch.bind(this) },
+	                                'Search'
+	                            )
+	                        )
+	                    )
 	                ),
-	                _react2.default.createElement(_Map2.default, null),
+	                _react2.default.createElement(_Map2.default, { customerAddress: this.state.customerAddress }),
 	                _react2.default.createElement(
 	                    'div',
 	                    null,
@@ -42991,6 +43032,9 @@
 	//import MapStore from '../../stores/MapStore'
 	//import MapAction from '../../actions/MapAction'
 
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+
 	var MainMap = function (_React$Component) {
 	    _inherits(MainMap, _React$Component);
 
@@ -43004,7 +43048,8 @@
 	            longitude: "",
 	            initialZoom: 13,
 	            mapCenterLat: 48.526311,
-	            mapCenterLng: 2.553158
+	            mapCenterLng: 2.553158,
+	            customerAddress: ""
 	        };
 	        return _this;
 	    }
@@ -43030,6 +43075,13 @@
 	            console.log("MainMap componentWillUnmount()");
 	        }
 	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextprops) {
+	            if (nextprops.customerAddress != this.state.customerAddress) {
+	                this.calculateAndDisplayRoute(directionsService, directionsDisplay);
+	            }
+	        }
+	    }, {
 	        key: 'prepareMapRender',
 	        value: function prepareMapRender() {
 
@@ -43046,10 +43098,6 @@
 	                stylers: [{ visibility: "off" }]
 	            }];
 
-	            var directionsService = new google.maps.DirectionsService();
-	            var directionsDisplay = new google.maps.DirectionsRenderer();
-	            directionsDisplay.setMap(map);
-
 	            var mapContainer = document.getElementById('map');
 	            var map = new google.maps.Map(mapContainer, {
 	                center: { lat: this.state.mapCenterLat, lng: this.state.mapCenterLng },
@@ -43060,6 +43108,8 @@
 
 	            map.setOptions({ styles: styleArray });
 
+	            directionsDisplay.setMap(map);
+
 	            this.setState({ map: map });
 	        }
 	    }, {
@@ -43067,8 +43117,8 @@
 	        value: function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 	            directionsService.route({
-	                origin: document.getElementById('start').value,
-	                destination: document.getElementById('end').value,
+	                origin: this.props.customerAddress,
+	                destination: "39 avenue de Fontainebleau 77310 PRINGY",
 	                travelMode: google.maps.TravelMode.DRIVING
 	            }, function (response, status) {
 	                if (status === google.maps.DirectionsStatus.OK) {

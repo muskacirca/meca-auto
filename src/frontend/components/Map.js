@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom'
 //import MapStore from '../../stores/MapStore'
 //import MapAction from '../../actions/MapAction'
 
+var directionsService = new google.maps.DirectionsService;
+var directionsDisplay = new google.maps.DirectionsRenderer;
+
 class MainMap extends React.Component {
 
     constructor(props) {
@@ -13,7 +16,8 @@ class MainMap extends React.Component {
             longitude: "",
             initialZoom: 13,
             mapCenterLat: 48.526311,
-            mapCenterLng: 2.553158
+            mapCenterLng: 2.553158,
+            customerAddress: ""
         }
     }
 
@@ -27,15 +31,18 @@ class MainMap extends React.Component {
         // MapStore.listen(this.onChange.bind(this))
         // MapAction.fetchWrecksLightweight()
         this.prepareMapRender()
-
-
     }
 
     componentWillUnmount() {
         //MapStore.unlisten();
         console.log("MainMap componentWillUnmount()")
     }
-
+    
+    componentWillReceiveProps(nextprops) {
+        if(nextprops.customerAddress != this.state.customerAddress) {
+            this.calculateAndDisplayRoute(directionsService, directionsDisplay)    
+        }
+    }
 
     prepareMapRender() {
 
@@ -61,9 +68,7 @@ class MainMap extends React.Component {
             }
         ]
 
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        directionsDisplay.setMap(map);
+       
 
         var mapContainer = document.getElementById('map');
         var map = new google.maps.Map(mapContainer, {
@@ -75,14 +80,17 @@ class MainMap extends React.Component {
 
         map.setOptions({styles: styleArray })
 
+
+        directionsDisplay.setMap(map);
+        
         this.setState({map: map});
     }
 
     calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
             directionsService.route({
-            origin: document.getElementById('start').value,
-            destination: document.getElementById('end').value,
+            origin: this.props.customerAddress,
+            destination: "39 avenue de Fontainebleau 77310 PRINGY",
             travelMode: google.maps.TravelMode.DRIVING
         }, function(response, status) {
             if (status === google.maps.DirectionsStatus.OK) {
