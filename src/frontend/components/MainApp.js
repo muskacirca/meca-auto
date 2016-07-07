@@ -32,7 +32,7 @@ class MainApp extends React.Component{
 
     handleScroll(e) {
 
-        
+
         let scrollTop = /* work on Chrome and Firefox */ window.scrollY;
 
         if(scrollTop > 151) {
@@ -57,10 +57,10 @@ class MainApp extends React.Component{
                     </div>
                 </div>
                 <NavBar fix={yo}/>
+                
+                {this.props.children}
 
-                <div className="site-content">
-                    {this.props.children}
-                </div>
+                <footer className="footer">Footer</footer>
                 <div className="site-cache" onClick={this.onHiddenSiteCLick.bind(this)}></div>
             </div>
         );

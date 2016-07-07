@@ -67,7 +67,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _history = __webpack_require__(239);
+	var _history = __webpack_require__(240);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26085,10 +26085,11 @@
 	                    )
 	                ),
 	                _react2.default.createElement(_navbar2.default, { fix: yo }),
+	                this.props.children,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'site-content' },
-	                    this.props.children
+	                    'footer',
+	                    { className: 'footer' },
+	                    'Footer'
 	                ),
 	                _react2.default.createElement('div', { className: 'site-cache', onClick: this.onHiddenSiteCLick.bind(this) })
 	            );
@@ -42867,6 +42868,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Map = __webpack_require__(239);
+
+	var _Map2 = _interopRequireDefault(_Map);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42889,34 +42894,60 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true' }),
-	                ' 39 avenue de Fontainebleau 77310 PRINGY',
-	                _react2.default.createElement('i', { className: 'fa fa-phone', 'aria-hidden': 'true' }),
-	                '01 64 41 80 97',
-	                _react2.default.createElement('i', { className: 'fa fa-fax', 'aria-hidden': 'true' }),
-	                '01 43 76 91 72',
-	                _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' }),
-	                'Nos Horaires d’Ouvertures :',
+	                { className: 'contact-page' },
 	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    'Du Lundi au Vendredi :'
+	                    'div',
+	                    { className: 'floating-panel' },
+	                    _react2.default.createElement('input', { className: 'form-control', placeholder: 'Enter your address ...' })
 	                ),
+	                _react2.default.createElement(_Map2.default, null),
 	                _react2.default.createElement(
-	                    'p',
+	                    'div',
 	                    null,
-	                    '8h30 – 12h30  /  13h30 – 18h30'
-	                ),
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    'Samedi :'
-	                ),
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    '9h00 – 13h00'
+	                    _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true ' }),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '39 avenue de Fontainebleau 77310 PRINGY'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        _react2.default.createElement('i', { className: 'fa fa-phone', 'aria-hidden': 'true' }),
+	                        '01 64 41 80 97'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        _react2.default.createElement('i', { className: 'fa fa-fax', 'aria-hidden': 'true' }),
+	                        '01 43 76 91 72'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        _react2.default.createElement('i', { className: 'fa fa-clock-o', 'aria-hidden': 'true' }),
+	                        'Nos Horaires d’Ouvertures :'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        'Du Lundi au Vendredi :'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '8h30 – 12h30  /  13h30 – 18h30'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        'Samedi :'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '9h00 – 13h00'
+	                    )
 	                )
 	            );
 	        }
@@ -42925,10 +42956,163 @@
 	    return Contact;
 	}(_react2.default.Component);
 
+	//
+
 	exports.default = Contact;
 
 /***/ },
 /* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(39);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//import MapStore from '../../stores/MapStore'
+	//import MapAction from '../../actions/MapAction'
+
+	var MainMap = function (_React$Component) {
+	    _inherits(MainMap, _React$Component);
+
+	    function MainMap(props) {
+	        _classCallCheck(this, MainMap);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MainMap).call(this, props));
+
+	        _this.state = {
+	            latitude: "",
+	            longitude: "",
+	            initialZoom: 13,
+	            mapCenterLat: 48.526311,
+	            mapCenterLng: 2.553158
+	        };
+	        return _this;
+	    }
+
+	    _createClass(MainMap, [{
+	        key: 'onChange',
+	        value: function onChange(state) {
+	            this.setState(state);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            console.log("MainMap componentDidMount()");
+
+	            // MapStore.listen(this.onChange.bind(this))
+	            // MapAction.fetchWrecksLightweight()
+	            this.prepareMapRender();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            //MapStore.unlisten();
+	            console.log("MainMap componentWillUnmount()");
+	        }
+	    }, {
+	        key: 'prepareMapRender',
+	        value: function prepareMapRender() {
+
+	            var styleArray = [{
+	                featureType: "all",
+	                stylers: [{ saturation: 0 }]
+	            }, {
+	                featureType: "road.arterial",
+	                elementType: "geometry",
+	                stylers: [{ hue: "#00ffee" }, { saturation: 50 }]
+	            }, {
+	                featureType: "poi.business",
+	                elementType: "labels",
+	                stylers: [{ visibility: "off" }]
+	            }];
+
+	            var directionsService = new google.maps.DirectionsService();
+	            var directionsDisplay = new google.maps.DirectionsRenderer();
+	            directionsDisplay.setMap(map);
+
+	            var mapContainer = document.getElementById('map');
+	            var map = new google.maps.Map(mapContainer, {
+	                center: { lat: this.state.mapCenterLat, lng: this.state.mapCenterLng },
+	                streetViewControl: false,
+	                disableDefaultUI: true,
+	                zoom: this.state.initialZoom
+	            });
+
+	            map.setOptions({ styles: styleArray });
+
+	            this.setState({ map: map });
+	        }
+	    }, {
+	        key: 'calculateAndDisplayRoute',
+	        value: function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+
+	            directionsService.route({
+	                origin: document.getElementById('start').value,
+	                destination: document.getElementById('end').value,
+	                travelMode: google.maps.TravelMode.DRIVING
+	            }, function (response, status) {
+	                if (status === google.maps.DirectionsStatus.OK) {
+	                    directionsDisplay.setDirections(response);
+	                } else {
+	                    window.alert('Directions request failed due to ' + status);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'drawMarkers',
+	        value: function drawMarkers(map) {
+
+	            console.log("draw marker");
+	            var myLatLng = { lat: 48.526311, lng: 2.553158 };
+	            var marker = new google.maps.Marker({
+	                position: myLatLng,
+	                map: map,
+	                title: "MPA"
+	            });
+
+	            // marker.addListener('click', function() {
+	            //     map.setZoom(7);
+	            //     map.setCenter(marker.getPosition());
+	            //     this.handleMarkerClick(elt.wreckId)
+	            // }.bind(this));
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            this.drawMarkers(this.state.map);
+
+	            return _react2.default.createElement('div', { id: 'map' });
+	        }
+	    }]);
+
+	    return MainMap;
+	}(_react2.default.Component);
+
+	exports.default = MainMap;
+
+/***/ },
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42969,7 +43153,7 @@
 
 	exports.useBasename = _useBasename3['default'];
 
-	var _useBeforeUnload2 = __webpack_require__(240);
+	var _useBeforeUnload2 = __webpack_require__(241);
 
 	var _useBeforeUnload3 = _interopRequireDefault(_useBeforeUnload2);
 
@@ -42989,13 +43173,13 @@
 
 	// deprecated
 
-	var _enableBeforeUnload2 = __webpack_require__(241);
+	var _enableBeforeUnload2 = __webpack_require__(242);
 
 	var _enableBeforeUnload3 = _interopRequireDefault(_enableBeforeUnload2);
 
 	exports.enableBeforeUnload = _enableBeforeUnload3['default'];
 
-	var _enableQueries2 = __webpack_require__(242);
+	var _enableQueries2 = __webpack_require__(243);
 
 	var _enableQueries3 = _interopRequireDefault(_enableQueries2);
 
@@ -43004,7 +43188,7 @@
 	exports.createLocation = createLocation;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -43121,7 +43305,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43134,7 +43318,7 @@
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
-	var _useBeforeUnload = __webpack_require__(240);
+	var _useBeforeUnload = __webpack_require__(241);
 
 	var _useBeforeUnload2 = _interopRequireDefault(_useBeforeUnload);
 
@@ -43142,7 +43326,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
