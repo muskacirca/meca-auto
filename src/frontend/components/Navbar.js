@@ -50,6 +50,7 @@ class NavBarBox extends React.Component {
                         <a className="anchor" href="#stock" activeClassName="link-active" onClick={this.safehandleClick.bind(this)}>
                             Ventes pieces détachées
                         </a>
+                        <Link to="/booking" acticeClassName="link-active">Booking</Link>
                         <Link to="/contact" activeClassName="link-active">Contact et Plans d'accès</Link>
                     </nav>
             
