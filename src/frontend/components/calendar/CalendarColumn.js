@@ -11,22 +11,22 @@ class CalendarColumn extends React.Component {
     constructor(props) {
         super(props)
     }
-    
+
     renderEventsList(events) {
-        
+
         let slicedArray = _.slice(events.map((event, key) => {
             return  <li key={"calendar-event-list-" + this.props.dayNumber + "-" + key}>
-                        <Link to={"/event/" + event.node.id}>{event.node.name}</Link>
+                        <Link to={"/event/" + event.id}>{event.summary}</Link>
                     </li>
         }), 0, 3);
-        
+
         return events.length > 3 ? _.concat(slicedArray, "...") : slicedArray
     }
 
     handleEventBadgeClick() {
-        
+
     }
-    
+
     renderMoreButton() {
         return  <div className="mobile-hide calendar-event-plus-wrapper">
                     <div className="pointer calendar-event-plus"
@@ -35,20 +35,20 @@ class CalendarColumn extends React.Component {
                     </div>
                 </div>
     }
-    
+
     render() {
-        
+
         let dayNumber = this.props.dayNumber;
         let now = moment();
-        
+
         let events = this.renderEventsList(this.props.events);
-        
-        let className = dayNumber == now.date() 
-                        && this.props.defaultDate.month() == now.month() 
+
+        let className = dayNumber == now.date()
+                        && this.props.defaultDate.month() == now.month()
                         && this.props.defaultDate.year() == now.year() ? "red" :  "";
-        
+
         let moreButton = this.props.events.length > 3 ? this.renderMoreButton() : null;
-        
+
         return  <div className="calendar-row-content calendar-days">
                     <div className={className + " calendar-days-tr-up"}>
                         {dayNumber}

@@ -43212,13 +43212,17 @@
 	    function Booking(props) {
 	        _classCallCheck(this, Booking);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Booking).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Booking).call(this, props));
+
+	        _this.state = {
+	            events: []
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Booking, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            console.log("component did mount");
 	            this.checkAuth();
 	        }
 
@@ -43229,9 +43233,6 @@
 	    }, {
 	        key: 'checkAuth',
 	        value: function checkAuth() {
-
-	            console.log("check auth");
-
 	            gapi.auth.authorize({
 	                'client_id': CLIENT_ID,
 	                'scope': SCOPES.join(' '),
@@ -43248,9 +43249,6 @@
 	    }, {
 	        key: 'handleAuthResult',
 	        value: function handleAuthResult(authResult) {
-
-	            console.log("handle auth result");
-
 	            var authorizeDiv = document.getElementById('authorize-div');
 	            if (authResult && !authResult.error) {
 	                // Hide auth UI, then load client library.
@@ -43272,9 +43270,6 @@
 	    }, {
 	        key: 'handleAuthClick',
 	        value: function handleAuthClick(event) {
-
-	            console.log("handle auth click");
-
 	            gapi.auth.authorize({ client_id: CLIENT_ID, scope: SCOPES, immediate: false }, this.handleAuthResult.bind(this));
 	            return false;
 	        }
@@ -43287,9 +43282,6 @@
 	    }, {
 	        key: 'loadCalendarApi',
 	        value: function loadCalendarApi() {
-
-	            console.log("loadCalendarApi");
-
 	            gapi.client.load('calendar', 'v3', this.listUpcomingEvents.bind(this));
 	        }
 
@@ -43304,8 +43296,6 @@
 	        value: function listUpcomingEvents() {
 	            var _this2 = this;
 
-	            console.log("in upcoming events");
-
 	            var request = gapi.client.calendar.events.list({
 	                'calendarId': 'primary',
 	                'timeMin': new Date().toISOString(),
@@ -43317,36 +43307,10 @@
 
 	            request.execute(function (resp) {
 	                var events = resp.items;
-	                _this2.appendPre('Upcoming events:');
+	                console.log("events : " + JSON.stringify(events));
 
-	                if (events.length > 0) {
-	                    for (var i = 0; i < events.length; i++) {
-	                        var event = events[i];
-	                        var when = event.start.dateTime;
-	                        if (!when) {
-	                            when = event.start.date;
-	                        }
-	                        _this2.appendPre(event.summary + ' (' + when + ')');
-	                    }
-	                } else {
-	                    _this2.appendPre('No upcoming events found.');
-	                }
+	                _this2.setState({ events: events });
 	            });
-	        }
-
-	        /**
-	         * Append a pre element to the body containing the given message
-	         * as its text node.
-	         *
-	         * @param {string} message Text to be placed in pre element.
-	         */
-
-	    }, {
-	        key: 'appendPre',
-	        value: function appendPre(message) {
-	            var pre = document.getElementById('calendar-output');
-	            var textContent = document.createTextNode(message + '\n');
-	            pre.appendChild(textContent);
 	        }
 	    }, {
 	        key: 'render',
@@ -43355,13 +43319,7 @@
 	                'div',
 	                null,
 	                _react2.default.createElement('div', { id: 'authorize-div' }),
-	                _react2.default.createElement('div', { id: 'calendar-output' }),
-	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'btn btn-primary', onClick: this.handleAuthClick.bind(this) },
-	                    'Load'
-	                ),
-	                _react2.default.createElement(_Calendar2.default, null)
+	                _react2.default.createElement(_Calendar2.default, { events: this.state.events })
 	            );
 	        }
 	    }]);
@@ -43504,7 +43462,7 @@
 	        value: function findEventsByDay(events, dayNumber) {
 
 	            return events != undefined ? events.filter(function (event) {
-	                return (0, _moment2.default)(event.node.startDate).dates() == dayNumber;
+	                return (0, _moment2.default)(event.start.dateTime).dates() == dayNumber;
 	            }) : [];
 	        }
 	    }, {
@@ -57401,8 +57359,8 @@
 	                    { key: "calendar-event-list-" + _this2.props.dayNumber + "-" + key },
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
-	                        { to: "/event/" + event.node.id },
-	                        event.node.name
+	                        { to: "/event/" + event.id },
+	                        event.summary
 	                    )
 	                );
 	            }), 0, 3);
