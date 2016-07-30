@@ -7,7 +7,8 @@ html, body {
   padding: 0; }
 
 #app,
-.site-pusher {
+.site-pusher,
+.container-fluid {
   height: 100%; }
 
 /*

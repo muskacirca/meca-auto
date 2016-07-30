@@ -39,9 +39,9 @@ class CalendarHeader extends React.Component {
 
         return  <div className="sub-bar row">
                     <div className="col-md-6 col-md-offset-2 col-sm-6 col-xs-6">
-                        <h2>{date}</h2>
+                        <h3 className="calendar-title">{date}</h3>
                     </div>
-                    <div className="center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5">
+                    <div className="mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5">
                         <div id="authorize-div" className="btn-group" role="group">
                             <Link to="/admin/event/create">
                                 <button type="button" className="btn btn-primary">Add Event</button>
