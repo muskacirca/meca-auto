@@ -2,6 +2,12 @@
 
 import React from 'react'
 import Calendar from './calendar/Calendar'
+import CalendarHeader from './calendar/CalendarHeader'
+import moment from 'moment'
+
+import {
+    getFirstDayOfMonth
+} from './calendar/utils/DateUtils'
 
 var CLIENT_ID = '1026973050796-k1k88b9umrhkckd7v9en1kfjr2l9iern.apps.googleusercontent.com';
 var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
@@ -11,10 +17,11 @@ class Booking extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            events: []
+            events: [],
+            displayDate: moment()
         }
     }
-    
+
     componentDidMount() {
         this.checkAuth()
     }
@@ -23,6 +30,7 @@ class Booking extends React.Component {
      * Check if current user has authorized this application.
      */
     checkAuth() {
+        console.log("checkAuth");
         gapi.auth.authorize(
             {
                 'client_id': CLIENT_ID,
@@ -37,7 +45,10 @@ class Booking extends React.Component {
      * @param {Object} authResult Authorization result.
      */
     handleAuthResult(authResult) {
-        var authorizeDiv = document.getElementById('authorize-div');
+
+        console.log("handle auth result");
+
+        let authorizeDiv = document.getElementById('authorize-div');
         if (authResult && !authResult.error) {
             // Hide auth UI, then load client library.
             authorizeDiv.style.display = 'none';
@@ -66,6 +77,7 @@ class Booking extends React.Component {
      * once client library is loaded.
      */
     loadCalendarApi() {
+        console.log("loaCalendarapi");
         gapi.client.load('calendar', 'v3', this.listUpcomingEvents.bind(this));
     }
 
@@ -75,10 +87,19 @@ class Booking extends React.Component {
      * appropriate message is printed.
      */
     listUpcomingEvents() {
+        
+        
+        
+        let dateMin = getFirstDayOfMonth(this.state.displayDate);
+        let dateMax = moment(dateMin).add(1, 'M');
+        
+        console.log("timeMin : " + JSON.stringify(dateMin.toISOString()));
+        console.log("timeMax() : " + JSON.stringify(dateMax.toISOString()));
 
         var request = gapi.client.calendar.events.list({
             'calendarId': 'primary',
-            'timeMin': (new Date()).toISOString(),
+            'timeMin': dateMin.toISOString(),
+            'timeMax': dateMax.toISOString(),
             'showDeleted': false,
             'singleEvents': true,
             'maxResults': 10,
@@ -88,17 +109,40 @@ class Booking extends React.Component {
         request.execute((resp) => {
             var events = resp.items;
             console.log("events : " + JSON.stringify(events));
-            
+
             this.setState({events: events})
 
         });
     }
-    
+
+    increaseCalendar() {
+
+        let newDisplayDate = moment(this.state.displayDate).add(1, 'M');
+        this.setState({displayDate: newDisplayDate}, () => {this.listUpcomingEvents()})
+    }
+
+    subtractCalendar() {
+
+        let newDisplayDate = moment(this.state.displayDate).subtract(1, 'M');
+        this.setState({displayDate: newDisplayDate}, () => {this.listUpcomingEvents()})
+    }
+
+    getNow() {
+        this.setState({displayDate: moment()}, () => {this.listUpcomingEvents()})
+    }
+
     render() {
+
+        let date = this.state.displayDate;
+
         return  <div>
-                    <div id="authorize-div"></div>
-                    <Calendar events={this.state.events}/>
-                    
+                    <CalendarHeader defaultDate={date}
+                            increaseCalendar={this.increaseCalendar.bind(this)}
+                            subtractCalendar={this.subtractCalendar.bind(this)}
+                            getNow={this.getNow.bind(this)} />
+
+                    <Calendar defaultDate={this.state.displayDate} events={this.state.events}/>
+
                 </div>
     }
 }

@@ -1,6 +1,11 @@
 import React from 'react'
 import moment from 'moment';
 
+
+import {
+    getFirstDayOfMonth
+} from './utils/DateUtils'
+
 const days_name = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
 import CalendarColumn from './CalendarColumn'
@@ -17,15 +22,6 @@ class Calendar extends React.Component {
 
     getDayOfWeek() {
         return this.state.defaultDate.format("ddd");
-    }
-
-    getFirstDayOfMonth() {
-
-        var year = moment(this.state.defaultDate).year();
-        var month = moment(this.state.defaultDate).month();
-        var startDate = moment([year, month]);
-
-        return startDate.format("ddd");
     }
 
     getDaysInMonth() {
@@ -68,7 +64,7 @@ class Calendar extends React.Component {
     renderBlankDays() {
         var blankDays = []
         var i = 0;
-        while (this.getFirstDayOfMonth() != days_name[i]) {
+        while (getFirstDayOfMonth(this.state.defaultDate, "ddd") != days_name[i]) {
             blankDays[i] = <div className="calendar-row-content calendar-blank-days" key={"calendar-blank-days-" + i}/>
             i++;
         }
@@ -133,7 +129,6 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-    defaultDate: React.PropTypes.func.required,
     events: React.PropTypes.array
 };
 

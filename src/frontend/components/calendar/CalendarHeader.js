@@ -24,7 +24,7 @@ class CalendarHeader extends React.Component {
     getNow() {
         this.props.getNow()
     }
-    
+
     componentWillReceiveProps(newprops) {
         this.setState({defaultDate: moment(newprops.defaultDate)})
     }
@@ -41,8 +41,8 @@ class CalendarHeader extends React.Component {
                     <div className="col-md-6 col-md-offset-2 col-sm-6 col-xs-6">
                         <h2>{date}</h2>
                     </div>
-                    <div className="mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5">
-                        <div className="btn-group" role="group">
+                    <div className="center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5">
+                        <div id="authorize-div" className="btn-group" role="group">
                             <Link to="/admin/event/create">
                                 <button type="button" className="btn btn-primary">Add Event</button>
                             </Link>
@@ -59,23 +59,14 @@ class CalendarHeader extends React.Component {
                             </button>
                         </div>
                     </div>
-                   
+
                 </div>
 
     }
-
-// <div className="sub-bar-component-centered col-md-1 col-sm-2 col-xs-1">
-//
-// </div>
-// <div className="sub-bar-component-centered col-md-1 col-sm-2 col-xs-1">
-//
-//     </div>
-
-
 }
 
 CalendarHeader.contextTypes = {
     router: React.PropTypes.object.isRequired
-}
+};
 
 export default CalendarHeader

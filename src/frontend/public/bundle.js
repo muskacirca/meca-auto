@@ -43195,6 +43195,16 @@
 
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
+	var _CalendarHeader = __webpack_require__(353);
+
+	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
+
+	var _moment = __webpack_require__(242);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _DateUtils = __webpack_require__(354);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43215,7 +43225,8 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Booking).call(this, props));
 
 	        _this.state = {
-	            events: []
+	            events: [],
+	            displayDate: (0, _moment2.default)()
 	        };
 	        return _this;
 	    }
@@ -43233,6 +43244,7 @@
 	    }, {
 	        key: 'checkAuth',
 	        value: function checkAuth() {
+	            console.log("checkAuth");
 	            gapi.auth.authorize({
 	                'client_id': CLIENT_ID,
 	                'scope': SCOPES.join(' '),
@@ -43249,6 +43261,9 @@
 	    }, {
 	        key: 'handleAuthResult',
 	        value: function handleAuthResult(authResult) {
+
+	            console.log("handle auth result");
+
 	            var authorizeDiv = document.getElementById('authorize-div');
 	            if (authResult && !authResult.error) {
 	                // Hide auth UI, then load client library.
@@ -43282,6 +43297,7 @@
 	    }, {
 	        key: 'loadCalendarApi',
 	        value: function loadCalendarApi() {
+	            console.log("loaCalendarapi");
 	            gapi.client.load('calendar', 'v3', this.listUpcomingEvents.bind(this));
 	        }
 
@@ -43296,9 +43312,16 @@
 	        value: function listUpcomingEvents() {
 	            var _this2 = this;
 
+	            var dateMin = (0, _DateUtils.getFirstDayOfMonth)(this.state.displayDate);
+	            var dateMax = (0, _moment2.default)(dateMin).add(1, 'M');
+
+	            console.log("timeMin : " + JSON.stringify(dateMin.toISOString()));
+	            console.log("timeMax() : " + JSON.stringify(dateMax.toISOString()));
+
 	            var request = gapi.client.calendar.events.list({
 	                'calendarId': 'primary',
-	                'timeMin': new Date().toISOString(),
+	                'timeMin': dateMin.toISOString(),
+	                'timeMax': dateMax.toISOString(),
 	                'showDeleted': false,
 	                'singleEvents': true,
 	                'maxResults': 10,
@@ -43313,13 +43336,48 @@
 	            });
 	        }
 	    }, {
+	        key: 'increaseCalendar',
+	        value: function increaseCalendar() {
+	            var _this3 = this;
+
+	            var newDisplayDate = (0, _moment2.default)(this.state.displayDate).add(1, 'M');
+	            this.setState({ displayDate: newDisplayDate }, function () {
+	                _this3.listUpcomingEvents();
+	            });
+	        }
+	    }, {
+	        key: 'subtractCalendar',
+	        value: function subtractCalendar() {
+	            var _this4 = this;
+
+	            var newDisplayDate = (0, _moment2.default)(this.state.displayDate).subtract(1, 'M');
+	            this.setState({ displayDate: newDisplayDate }, function () {
+	                _this4.listUpcomingEvents();
+	            });
+	        }
+	    }, {
+	        key: 'getNow',
+	        value: function getNow() {
+	            var _this5 = this;
+
+	            this.setState({ displayDate: (0, _moment2.default)() }, function () {
+	                _this5.listUpcomingEvents();
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+
+	            var date = this.state.displayDate;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement('div', { id: 'authorize-div' }),
-	                _react2.default.createElement(_Calendar2.default, { events: this.state.events })
+	                _react2.default.createElement(_CalendarHeader2.default, { defaultDate: date,
+	                    increaseCalendar: this.increaseCalendar.bind(this),
+	                    subtractCalendar: this.subtractCalendar.bind(this),
+	                    getNow: this.getNow.bind(this) }),
+	                _react2.default.createElement(_Calendar2.default, { defaultDate: this.state.displayDate, events: this.state.events })
 	            );
 	        }
 	    }]);
@@ -43350,6 +43408,8 @@
 	var _moment = __webpack_require__(242);
 
 	var _moment2 = _interopRequireDefault(_moment);
+
+	var _DateUtils = __webpack_require__(354);
 
 	var _CalendarColumn = __webpack_require__(344);
 
@@ -43385,16 +43445,6 @@
 	        key: 'getDayOfWeek',
 	        value: function getDayOfWeek() {
 	            return this.state.defaultDate.format("ddd");
-	        }
-	    }, {
-	        key: 'getFirstDayOfMonth',
-	        value: function getFirstDayOfMonth() {
-
-	            var year = (0, _moment2.default)(this.state.defaultDate).year();
-	            var month = (0, _moment2.default)(this.state.defaultDate).month();
-	            var startDate = (0, _moment2.default)([year, month]);
-
-	            return startDate.format("ddd");
 	        }
 	    }, {
 	        key: 'getDaysInMonth',
@@ -43450,7 +43500,7 @@
 	        value: function renderBlankDays() {
 	            var blankDays = [];
 	            var i = 0;
-	            while (this.getFirstDayOfMonth() != days_name[i]) {
+	            while ((0, _DateUtils.getFirstDayOfMonth)(this.state.defaultDate, "ddd") != days_name[i]) {
 	                blankDays[i] = _react2.default.createElement('div', { className: 'calendar-row-content calendar-blank-days', key: "calendar-blank-days-" + i });
 	                i++;
 	            }
@@ -43520,7 +43570,6 @@
 	}(_react2.default.Component);
 
 	Calendar.propTypes = {
-	    defaultDate: _react2.default.PropTypes.func.required,
 	    events: _react2.default.PropTypes.array
 	};
 
@@ -58020,6 +58069,172 @@
 
 	exports['default'] = _deprecate2['default'](_useQueries2['default'], 'enableQueries is deprecated, use useQueries instead');
 	module.exports = exports['default'];
+
+/***/ },
+/* 353 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(242);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _reactRouter = __webpack_require__(169);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CalendarHeader = function (_React$Component) {
+	    _inherits(CalendarHeader, _React$Component);
+
+	    function CalendarHeader(props) {
+	        _classCallCheck(this, CalendarHeader);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CalendarHeader).call(this, props));
+
+	        _this.state = {
+	            defaultDate: (0, _moment2.default)(_this.props.defaultDate)
+	        };
+	        return _this;
+	    }
+
+	    _createClass(CalendarHeader, [{
+	        key: 'increaseCalendar',
+	        value: function increaseCalendar() {
+	            this.props.increaseCalendar();
+	        }
+	    }, {
+	        key: 'subtractCalendar',
+	        value: function subtractCalendar() {
+	            this.props.subtractCalendar();
+	        }
+	    }, {
+	        key: 'getNow',
+	        value: function getNow() {
+	            this.props.getNow();
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(newprops) {
+	            this.setState({ defaultDate: (0, _moment2.default)(newprops.defaultDate) });
+	        }
+	    }, {
+	        key: 'goToAddEventPage',
+	        value: function goToAddEventPage() {
+	            this.context.router.push("/admin/event/create");
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            var date = (0, _moment2.default)(this.state.defaultDate).format("MMMM YYYY");
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'sub-bar row' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-md-6 col-md-offset-2 col-sm-6 col-xs-6' },
+	                    _react2.default.createElement(
+	                        'h2',
+	                        null,
+	                        date
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { id: 'authorize-div', className: 'btn-group', role: 'group' },
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/admin/event/create' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-primary' },
+	                                'Add Event'
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'btn-group', role: 'group' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', className: 'btn btn-default', onClick: this.subtractCalendar.bind(this) },
+	                            _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', className: 'btn btn-default', onClick: this.getNow.bind(this) },
+	                            'Today'
+	                        ),
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'button', className: 'btn btn-default', onClick: this.increaseCalendar.bind(this) },
+	                            _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return CalendarHeader;
+	}(_react2.default.Component);
+
+	CalendarHeader.contextTypes = {
+	    router: _react2.default.PropTypes.object.isRequired
+	};
+
+	exports.default = CalendarHeader;
+
+/***/ },
+/* 354 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getFirstDayOfMonth = getFirstDayOfMonth;
+
+	var _moment = __webpack_require__(242);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getFirstDayOfMonth(date, format) {
+
+	    var year = (0, _moment2.default)(date).year();
+	    var month = (0, _moment2.default)(date).month();
+	    var startDate = (0, _moment2.default)([year, month]);
+
+	    return format ? startDate.format(format) : startDate;
+	}
 
 /***/ }
 /******/ ]);
