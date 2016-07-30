@@ -66,12 +66,13 @@ html, body {
 }
 
 .__right {
-  padding-right: 15em;
+  padding-right: 10em;
+  padding-left: 5em;
 }
 
 .__left {
   padding-left: 10em;
-  padding-right: 10em;
+  padding-right: 5em;
 
 }
 
@@ -290,6 +291,21 @@ header.header.fixed {
   }
 
   .mobile-hide{ display: none; }
+
+  .__right {
+    padding-right: 5em;
+    padding-left: 5em;
+  }
+
+  .__left {
+    padding-right: 5em;
+    padding-left: 5em;
+  }
+
+  .text-presentation {
+    padding-top: 5em;
+  }
+
 }
 
 
