@@ -44700,11 +44700,7 @@
 	                    increaseCalendar: this.increaseCalendar.bind(this),
 	                    subtractCalendar: this.subtractCalendar.bind(this),
 	                    getNow: this.getNow.bind(this) }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row' },
-	                    _react2.default.createElement(_Calendar2.default, { defaultDate: this.state.displayDate, events: this.state.events })
-	                )
+	                _react2.default.createElement(_Calendar2.default, { defaultDate: this.state.displayDate, events: this.state.events })
 	            );
 	        }
 	    }]);
@@ -59520,53 +59516,57 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'sub-bar row' },
+	                { className: '' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'col-md-6 col-md-offset-2 col-sm-6 col-xs-6' },
-	                    _react2.default.createElement(
-	                        'h3',
-	                        { className: 'calendar-title' },
-	                        date
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5' },
+	                    { className: 'sub-bar' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { id: 'authorize-div', className: 'btn-group', role: 'group' },
+	                        { className: 'col-md-6 col-md-offset-2 col-sm-6 col-xs-6' },
 	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/admin/event/create' },
+	                            'h3',
+	                            { className: 'calendar-title' },
+	                            date
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { id: 'authorize-div', className: 'btn-group', role: 'group' },
 	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'button', className: 'btn btn-primary' },
-	                                'Add Event'
+	                                _reactRouter.Link,
+	                                { to: '/admin/event/create' },
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { type: 'button', className: 'btn btn-primary' },
+	                                    'Add Event'
+	                                )
 	                            )
 	                        )
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5' },
+	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'btn-group', role: 'group' },
+	                        { className: 'center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5' },
 	                        _react2.default.createElement(
-	                            'button',
-	                            { type: 'button', className: 'btn btn-default', onClick: this.subtractCalendar.bind(this) },
-	                            _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
-	                        ),
-	                        _react2.default.createElement(
-	                            'button',
-	                            { type: 'button', className: 'btn btn-default', onClick: this.getNow.bind(this) },
-	                            'Today'
-	                        ),
-	                        _react2.default.createElement(
-	                            'button',
-	                            { type: 'button', className: 'btn btn-default', onClick: this.increaseCalendar.bind(this) },
-	                            _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	                            'div',
+	                            { className: 'btn-group', role: 'group' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', onClick: this.subtractCalendar.bind(this) },
+	                                _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
+	                            ),
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', onClick: this.getNow.bind(this) },
+	                                'Today'
+	                            ),
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', onClick: this.increaseCalendar.bind(this) },
+	                                _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	                            )
 	                        )
 	                    )
 	                )
