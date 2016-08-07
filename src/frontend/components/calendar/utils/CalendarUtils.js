@@ -11,13 +11,10 @@ export function computeFreeTime(dateOfTheDay, events) {
         let endTime = event.end.dateTime;
 
         let duration = computeDuration(startTime, endTime)
-        console.log("duration : " + JSON.stringify(duration));
         remainingWorkHours = remainingWorkHours - duration;
 
     });
-
-    console.log("remainingHour : " + JSON.stringify(remainingWorkHours));
-
+    
     if (remainingWorkHours > 5 * 60) {
         return "free"
     } else if(remainingWorkHours <= 0) {

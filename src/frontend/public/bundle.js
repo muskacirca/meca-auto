@@ -43522,9 +43522,6 @@
 	            var dateMin = (0, _DateUtils.getFirstDayOfMonth)(this.state.displayDate);
 	            var dateMax = (0, _moment2.default)(dateMin).add(1, 'M');
 
-	            console.log("timeMin : " + JSON.stringify(dateMin.toISOString()));
-	            console.log("timeMax() : " + JSON.stringify(dateMax.toISOString()));
-
 	            var request = gapi.client.calendar.events.list({
 	                'calendarId': 'primary',
 	                'timeMin': dateMin.toISOString(),
@@ -58740,11 +58737,8 @@
 	        var endTime = event.end.dateTime;
 
 	        var duration = computeDuration(startTime, endTime);
-	        console.log("duration : " + JSON.stringify(duration));
 	        remainingWorkHours = remainingWorkHours - duration;
 	    });
-
-	    console.log("remainingHour : " + JSON.stringify(remainingWorkHours));
 
 	    if (remainingWorkHours > 5 * 60) {
 	        return "free";

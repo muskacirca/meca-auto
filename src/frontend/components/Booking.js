@@ -88,14 +88,9 @@ class Booking extends React.Component {
      */
     listUpcomingEvents() {
         
-        
-        
         let dateMin = getFirstDayOfMonth(this.state.displayDate);
         let dateMax = moment(dateMin).add(1, 'M');
         
-        console.log("timeMin : " + JSON.stringify(dateMin.toISOString()));
-        console.log("timeMax() : " + JSON.stringify(dateMax.toISOString()));
-
         var request = gapi.client.calendar.events.list({
             'calendarId': 'primary',
             'timeMin': dateMin.toISOString(),

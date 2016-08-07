@@ -1,7 +1,6 @@
 import React from 'react'
 import moment from 'moment';
 
-
 import {
     getFirstDayOfMonth
 } from './utils/DateUtils'
@@ -50,7 +49,7 @@ class Calendar extends React.Component {
     fillWithBlankDays(aRowOfDays) {
 
         while(aRowOfDays.length != 7) {
-            aRowOfDays.push(<div className="calendar-row-content calendar-blank-days" key={"calendar-blank-days-" + aRowOfDays.length}/>)
+            aRowOfDays.push(<div className="calendar-row-content calendar-blank-days" key={"calendar-blank-days-" + aRowOfDays.length}></div>)
         }
         return aRowOfDays
     }
@@ -62,10 +61,10 @@ class Calendar extends React.Component {
     }
 
     renderBlankDays() {
-        var blankDays = []
+        var blankDays = [];
         var i = 0;
         while (getFirstDayOfMonth(this.state.defaultDate, "ddd") != days_name[i]) {
-            blankDays[i] = <div className="calendar-row-content calendar-blank-days" key={"calendar-blank-days-" + i}/>
+            blankDays[i] = <div className="calendar-row-content calendar-blank-days" key={"calendar-blank-days-" + i}></div>
             i++;
         }
 
@@ -90,12 +89,12 @@ class Calendar extends React.Component {
         for(var c=counter ; c < 7; c++) {
             if(dayNumber > this.getDaysInMonth()) break;
 
-            var eventsOfTheDay = this.findEventsByDay(this.props.events, dayNumber)
+            var eventsOfTheDay = this.findEventsByDay(this.props.events, dayNumber);
 
             blankDays.push(<CalendarColumn defaultDate={this.state.defaultDate}
                                            dayNumber={dayNumber}
                                            events={eventsOfTheDay}
-                                           key={"calendar-days-" + dayNumber} />)
+                                           key={"calendar-days-" + dayNumber} />);
             dayNumber++
         }
 
