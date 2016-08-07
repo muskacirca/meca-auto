@@ -102,7 +102,7 @@ class Booking extends React.Component {
             'timeMax': dateMax.toISOString(),
             'showDeleted': false,
             'singleEvents': true,
-            'maxResults': 10,
+            'maxResults': 100,
             'orderBy': 'startTime'
         });
 

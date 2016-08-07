@@ -1,6 +1,11 @@
 import React from 'react'
 import moment from 'moment'
-import _ from 'lodash'
+import slice from 'lodash/slice'
+import concat from 'lodash/concat'
+
+import {
+    computeFreeTime
+} from './utils/CalendarUtils'
 
 import {
     Link
@@ -14,13 +19,24 @@ class CalendarColumn extends React.Component {
 
     renderEventsList(events) {
 
-        let slicedArray = _.slice(events.map((event, key) => {
+        let slicedArray = slice(events.map((event, key) => {
             return  <li key={"calendar-event-list-" + this.props.dayNumber + "-" + key}>
                         <Link to={"/event/" + event.id}>{event.summary}</Link>
                     </li>
         }), 0, 3);
 
-        return events.length > 3 ? _.concat(slicedArray, "...") : slicedArray
+        return events.length > 3 ? concat(slicedArray, "...") : slicedArray
+    }
+
+    renderOccupation(events) {
+
+        let freeTime = "";
+        if(events) {
+            freeTime = computeFreeTime(moment(), events);
+        }
+        console.log("");
+        
+        return [<div>{freeTime}</div>]
     }
 
     handleEventBadgeClick() {
@@ -41,7 +57,8 @@ class CalendarColumn extends React.Component {
         let dayNumber = this.props.dayNumber;
         let now = moment();
 
-        let events = this.renderEventsList(this.props.events);
+
+        let events = this.renderOccupation(this.props.events);
 
         let className = dayNumber == now.date()
                         && this.props.defaultDate.month() == now.month()

@@ -31,7 +31,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "fs": "0.0.2",
-    "jest-cli": "^13.0.0",
+    "jest-cli": "^14.1.0",
     "json": "^9.0.3",
     "json-loader": "^0.5.4",
     "lodash": "^4.13.1",
@@ -51,5 +51,18 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.5.0"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/history",
+      "<rootDir>/node_modules/moment",
+      "<rootDir>/node_modules/lodash",
+      "<rootDir>/node_modules/axios"
+    ]
   }
 }
