@@ -140,9 +140,8 @@ class Booking extends React.Component {
                             increaseCalendar={this.increaseCalendar.bind(this)}
                             subtractCalendar={this.subtractCalendar.bind(this)}
                             getNow={this.getNow.bind(this)} />
-
-                    <Calendar defaultDate={this.state.displayDate} events={this.state.events}/>
-
+                
+                        <Calendar defaultDate={this.state.displayDate} events={this.state.events}/>
                 </div>
     }
 }

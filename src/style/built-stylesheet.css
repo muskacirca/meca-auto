@@ -7,7 +7,8 @@ html, body {
   padding: 0; }
 
 #app,
-.site-pusher {
+.site-pusher,
+.container-fluid {
   height: 100%; }
 
 /*
@@ -42,11 +43,12 @@ html, body {
   padding-top: 110px; }
 
 .__right {
-  padding-right: 15em; }
+  padding-right: 10em;
+  padding-left: 5em; }
 
 .__left {
   padding-left: 10em;
-  padding-right: 10em; }
+  padding-right: 5em; }
 
 .div1 .img-presentation {
   background-image: url("../style/images/mpa/repair-band.jpg"); }
@@ -217,7 +219,18 @@ header.header.fixed {
     background-color: rgba(0, 0, 0, 0.6); }
 
   .mobile-hide {
-    display: none; } }
+    display: none; }
+
+  .__right {
+    padding-right: 5em;
+    padding-left: 5em; }
+
+  .__left {
+    padding-right: 5em;
+    padding-left: 5em; }
+
+  .text-presentation {
+    padding-top: 5em; } }
 /*
   FOOTER
 */

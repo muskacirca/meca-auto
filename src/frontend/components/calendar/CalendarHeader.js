@@ -37,30 +37,33 @@ class CalendarHeader extends React.Component {
 
         var date = moment(this.state.defaultDate).format("MMMM YYYY")
 
-        return  <div className="sub-bar row">
-                    <div className="col-md-6 col-md-offset-2 col-sm-6 col-xs-6">
-                        <h2>{date}</h2>
-                    </div>
-                    <div className="center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5">
-                        <div id="authorize-div" className="btn-group" role="group">
-                            <Link to="/admin/event/create">
-                                <button type="button" className="btn btn-primary">Add Event</button>
-                            </Link>
+        return  <div className="">
+                    <div className="sub-bar">
+                        <div className="col-md-6 col-md-offset-2 col-sm-6 col-xs-6">
+                            <h3 className="calendar-title">{date}</h3>
                         </div>
-                    </div>
-                    <div className="center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5">
-                        <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-default" onClick={this.subtractCalendar.bind(this)}>
-                                <i className="fa fa-chevron-left" />
-                            </button>
-                            <button type="button" className="btn btn-default" onClick={this.getNow.bind(this)}>Today</button>
-                            <button type="button" className="btn btn-default" onClick={this.increaseCalendar.bind(this)}>
-                                <i className="fa fa-chevron-right"/>
-                            </button>
+                        <div className="mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5">
+                            <div id="authorize-div" className="btn-group" role="group">
+                                <Link to="/admin/event/create">
+                                    <button type="button" className="btn btn-primary">Add Event</button>
+                                </Link>
+                            </div>
                         </div>
+                        <div className="center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5">
+                            <div className="btn-group" role="group">
+                                <button type="button" className="btn btn-default" onClick={this.subtractCalendar.bind(this)}>
+                                    <i className="fa fa-chevron-left" />
+                                </button>
+                                <button type="button" className="btn btn-default" onClick={this.getNow.bind(this)}>Today</button>
+                                <button type="button" className="btn btn-default" onClick={this.increaseCalendar.bind(this)}>
+                                    <i className="fa fa-chevron-right"/>
+                                </button>
+                            </div>
+                        </div>
+        
                     </div>
-
                 </div>
+                
 
     }
 }

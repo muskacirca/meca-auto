@@ -57,10 +57,11 @@ class MainApp extends React.Component{
                     </div>
                 </div>
                 <NavBar fix={yo}/>
+                <div className="container-fluid">
+                    {this.props.children}
+                    <footer className="footer">Footer</footer>
+                </div>
                 
-                {this.props.children}
-
-                <footer className="footer">Footer</footer>
                 <div className="site-cache" onClick={this.onHiddenSiteCLick.bind(this)}></div>
             </div>
         );
