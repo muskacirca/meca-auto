@@ -21,7 +21,7 @@ class Booking extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.checkAuth()
     }
 
@@ -29,12 +29,13 @@ class Booking extends React.Component {
      * Check if current user has authorized this application.
      */
     checkAuth() {
-        gapi.auth.authorize(
-            {
-                'client_id': CLIENT_ID,
-                'scope': SCOPES.join(' '),
-                'immediate': true
-            }, this.handleAuthResult.bind(this));
+            
+            gapi.auth.authorize(
+                {
+                    'client_id': CLIENT_ID,
+                    'scope': SCOPES.join(' '),
+                    'immediate': true
+                }, this.handleAuthResult.bind(this));
     }
 
     /**
@@ -107,7 +108,8 @@ class Booking extends React.Component {
     render() {
         
         return  <div>
-                    <Calendar events={this.state.events} handleDateChange={this.listUpcomingEvents.bind(this)} />
+                    <Calendar events={this.state.events}
+                              handleDateChange={this.listUpcomingEvents.bind(this)} />
                 </div>
     }
 }

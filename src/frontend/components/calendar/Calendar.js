@@ -18,8 +18,14 @@ class Calendar extends React.Component {
         }
     }
 
-    getDayOfWeek() {
+    getDaysOfWeek() {
         return this.state.defaultDate.format("ddd");
+    }
+
+    getFirstDayOfWeek() {
+
+        let day = this.state.defaultDate.format("e");
+        return  this.state.defaultDate.subtract(day, 'days');
     }
 
     getDaysInMonth() {
@@ -28,6 +34,32 @@ class Calendar extends React.Component {
 
     renderCalendar(blankDays) {
 
+       return this.props.displayType === "month"
+        ? this.renderCalendarMonth(blankDays)
+           : this.renderCalendarWeek()
+    }
+    
+    renderCalendarWeek() {
+        
+        let firstDayOfWeek = this.getFirstDayOfWeek().format("D");
+        
+        let weekRow = [];
+        for(let day=0; day<7; day++) {
+
+            let eventsOfTheDay = this.findEventsByDay(this.props.events, firstDayOfWeek);
+            
+            weekRow.push(<CalendarColumn defaultDate={this.state.defaultDate}
+                                         dayNumber={firstDayOfWeek}
+                                         events={eventsOfTheDay}
+                                         key={"calendar-days-" + firstDayOfWeek} />)
+            
+            firstDayOfWeek++
+        }
+
+        return <div className="calendar-week-row">{weekRow}</div>
+    }
+    
+    renderCalendarMonth(blankDays) {
         var dayNumber = 1;
         var calendar = [];
 
@@ -44,6 +76,7 @@ class Calendar extends React.Component {
 
         return calendar
     }
+    
 
     fillWithBlankDays(aRowOfDays) {
 
@@ -88,7 +121,7 @@ class Calendar extends React.Component {
         for(var c=counter ; c < 7; c++) {
             if(dayNumber > this.getDaysInMonth()) break;
 
-            var eventsOfTheDay = this.findEventsByDay(this.props.events, dayNumber);
+            let eventsOfTheDay = this.findEventsByDay(this.props.events, dayNumber);
 
             blankDays.push(<CalendarColumn defaultDate={this.state.defaultDate}
                                            dayNumber={dayNumber}
@@ -127,9 +160,13 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-    events: React.PropTypes.array
+    events: React.PropTypes.array,
+    displayType:  React.PropTypes.oneOf(['month', 'week'])
 };
 
-Calendar.defaultProps = { defaultDate: moment() };
+Calendar.defaultProps = { 
+    defaultDate: moment(),
+    displayType: "month"
+};
 
 export default Calendar

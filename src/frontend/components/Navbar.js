@@ -41,16 +41,16 @@ class NavBarBox extends React.Component {
                        onClick={this.handleClick.bind(this)} href="#">
                     </a>
                     <nav className="menu">
-                        <a href="#repair" activeClassName="link-active" onClick={this.safehandleClick.bind(this)}>
+                        <a href="#repair"  onClick={this.safehandleClick.bind(this)}>
                             Réparations
                         </a>
-                        <a className="anchor" href="#care" activeClassName="link-active" onClick={this.safehandleClick.bind(this)}>
+                        <a className="anchor" href="#care" onClick={this.safehandleClick.bind(this)}>
                             Entretiens
                         </a>
-                        <a className="anchor" href="#stock" activeClassName="link-active" onClick={this.safehandleClick.bind(this)}>
+                        <a className="anchor" href="#stock" onClick={this.safehandleClick.bind(this)}>
                             Ventes pieces détachées
                         </a>
-                        <Link to="/booking" acticeClassName="link-active">Booking</Link>
+                        <Link to="/booking" activeClassName="link-active">Booking</Link>
                         <Link to="/contact" activeClassName="link-active">Contact et Plans d'accès</Link>
                     </nav>
             

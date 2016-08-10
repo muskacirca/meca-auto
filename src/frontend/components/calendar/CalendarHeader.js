@@ -26,7 +26,10 @@ class CalendarHeader extends React.Component {
     }
 
     componentWillReceiveProps(newprops) {
-        this.setState({defaultDate: moment(newprops.defaultDate)})
+        this.setState({
+            defaultDate: moment(newprops.defaultDate),
+            displayType: newprops.displaytype
+        })
     }
 
     goToAddEventPage() {
@@ -35,7 +38,10 @@ class CalendarHeader extends React.Component {
 
     render() {
 
-        var date = moment(this.state.defaultDate).format("MMMM YYYY")
+        let dateFormat = this.props.displayType === "month" ? "MMMM YYYY" : "wo";
+        var date = moment(this.state.defaultDate).format(dateFormat);
+
+        date = this.props.displayType === "month" ? date : date + " week of the year";
 
         return  <div className="">
                     <div className="sub-bar">
@@ -71,5 +77,15 @@ class CalendarHeader extends React.Component {
 CalendarHeader.contextTypes = {
     router: React.PropTypes.object.isRequired
 };
+
+CalendarHeader.propTypes = {
+    displayType:  React.PropTypes.oneOf(['month', 'week'])
+};
+
+CalendarHeader.defaultProps = {
+    displayType: "month"
+};
+
+
 
 export default CalendarHeader
