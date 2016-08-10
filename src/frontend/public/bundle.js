@@ -67,7 +67,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _history = __webpack_require__(379);
+	var _history = __webpack_require__(380);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43398,19 +43398,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Calendar = __webpack_require__(241);
+	var _CalendarWrapper = __webpack_require__(241);
 
-	var _Calendar2 = _interopRequireDefault(_Calendar);
-
-	var _CalendarHeader = __webpack_require__(378);
-
-	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
+	var _CalendarWrapper2 = _interopRequireDefault(_CalendarWrapper);
 
 	var _moment = __webpack_require__(242);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _DateUtils = __webpack_require__(344);
+	var _DateUtils = __webpack_require__(345);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43439,8 +43435,8 @@
 	    }
 
 	    _createClass(Booking, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
 	            this.checkAuth();
 	        }
 
@@ -43451,7 +43447,6 @@
 	    }, {
 	        key: 'checkAuth',
 	        value: function checkAuth() {
-	            console.log("checkAuth");
 	            gapi.auth.authorize({
 	                'client_id': CLIENT_ID,
 	                'scope': SCOPES.join(' '),
@@ -43468,8 +43463,6 @@
 	    }, {
 	        key: 'handleAuthResult',
 	        value: function handleAuthResult(authResult) {
-
-	            console.log("handle auth result");
 
 	            var authorizeDiv = document.getElementById('authorize-div');
 	            if (authResult && !authResult.error) {
@@ -43504,7 +43497,6 @@
 	    }, {
 	        key: 'loadCalendarApi',
 	        value: function loadCalendarApi() {
-	            console.log("loaCalendarapi");
 	            gapi.client.load('calendar', 'v3', this.listUpcomingEvents.bind(this));
 	        }
 
@@ -43516,10 +43508,10 @@
 
 	    }, {
 	        key: 'listUpcomingEvents',
-	        value: function listUpcomingEvents() {
+	        value: function listUpcomingEvents(date) {
 	            var _this2 = this;
 
-	            var dateMin = (0, _DateUtils.getFirstDayOfMonth)(this.state.displayDate);
+	            var dateMin = (0, _DateUtils.getFirstDayOfMonth)(date);
 	            var dateMax = (0, _moment2.default)(dateMin).add(1, 'M');
 
 	            var request = gapi.client.calendar.events.list({
@@ -43534,54 +43526,18 @@
 
 	            request.execute(function (resp) {
 	                var events = resp.items;
-	                console.log("events : " + JSON.stringify(events));
 
 	                _this2.setState({ events: events });
-	            });
-	        }
-	    }, {
-	        key: 'increaseCalendar',
-	        value: function increaseCalendar() {
-	            var _this3 = this;
-
-	            var newDisplayDate = (0, _moment2.default)(this.state.displayDate).add(1, 'M');
-	            this.setState({ displayDate: newDisplayDate }, function () {
-	                _this3.listUpcomingEvents();
-	            });
-	        }
-	    }, {
-	        key: 'subtractCalendar',
-	        value: function subtractCalendar() {
-	            var _this4 = this;
-
-	            var newDisplayDate = (0, _moment2.default)(this.state.displayDate).subtract(1, 'M');
-	            this.setState({ displayDate: newDisplayDate }, function () {
-	                _this4.listUpcomingEvents();
-	            });
-	        }
-	    }, {
-	        key: 'getNow',
-	        value: function getNow() {
-	            var _this5 = this;
-
-	            this.setState({ displayDate: (0, _moment2.default)() }, function () {
-	                _this5.listUpcomingEvents();
 	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 
-	            var date = this.state.displayDate;
-
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_CalendarHeader2.default, { defaultDate: date,
-	                    increaseCalendar: this.increaseCalendar.bind(this),
-	                    subtractCalendar: this.subtractCalendar.bind(this),
-	                    getNow: this.getNow.bind(this) }),
-	                _react2.default.createElement(_Calendar2.default, { defaultDate: this.state.displayDate, events: this.state.events })
+	                _react2.default.createElement(_CalendarWrapper2.default, { events: this.state.events, handleDateChange: this.listUpcomingEvents.bind(this) })
 	            );
 	        }
 	    }]);
@@ -43613,11 +43569,13 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _DateUtils = __webpack_require__(344);
+	var _Calendar = __webpack_require__(344);
 
-	var _CalendarColumn = __webpack_require__(345);
+	var _Calendar2 = _interopRequireDefault(_Calendar);
 
-	var _CalendarColumn2 = _interopRequireDefault(_CalendarColumn);
+	var _CalendarHeader = __webpack_require__(375);
+
+	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43627,159 +43585,88 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var days_name = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+	__webpack_require__(376);
 
-	__webpack_require__(374);
+	var CalendarWrapper = function (_React$Component) {
+	    _inherits(CalendarWrapper, _React$Component);
 
-	var Calendar = function (_React$Component) {
-	    _inherits(Calendar, _React$Component);
+	    function CalendarWrapper(props) {
+	        _classCallCheck(this, CalendarWrapper);
 
-	    function Calendar(props) {
-	        _classCallCheck(this, Calendar);
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CalendarWrapper).call(this, props));
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
+	        _this.increaseCalendar = _this.increaseCalendar.bind(_this);
+	        _this.subtractCalendar = _this.subtractCalendar.bind(_this);
+	        _this.getNow = _this.getNow.bind(_this);
 
 	        _this.state = {
-	            defaultDate: (0, _moment2.default)(_this.props.defaultDate)
+	            displayDate: _this.props.defaultDate
 	        };
 	        return _this;
 	    }
 
-	    _createClass(Calendar, [{
-	        key: 'getDayOfWeek',
-	        value: function getDayOfWeek() {
-	            return this.state.defaultDate.format("ddd");
-	        }
-	    }, {
-	        key: 'getDaysInMonth',
-	        value: function getDaysInMonth() {
-	            return this.state.defaultDate.daysInMonth();
-	        }
-	    }, {
-	        key: 'renderCalendar',
-	        value: function renderCalendar(blankDays) {
+	    _createClass(CalendarWrapper, [{
+	        key: 'increaseCalendar',
+	        value: function increaseCalendar() {
+	            var _this2 = this;
 
-	            var dayNumber = 1;
-	            var calendar = [];
-
-	            for (var c = 0; c < 6; c++) {
-
-	                if (dayNumber > this.getDaysInMonth()) break;
-
-	                var weekRow = this.renderWeekRow(dayNumber, blankDays);
-	                calendar.push(_react2.default.createElement(
-	                    'div',
-	                    { className: 'calendar-month-row', key: "calendar-row-" + c },
-	                    weekRow.html
-	                ));
-
-	                blankDays = [];
-	                dayNumber = weekRow.newDayNumber;
-	            }
-
-	            return calendar;
-	        }
-	    }, {
-	        key: 'fillWithBlankDays',
-	        value: function fillWithBlankDays(aRowOfDays) {
-
-	            while (aRowOfDays.length != 7) {
-	                aRowOfDays.push(_react2.default.createElement('div', { className: 'calendar-row-content calendar-blank-days', key: "calendar-blank-days-" + aRowOfDays.length }));
-	            }
-	            return aRowOfDays;
-	        }
-	    }, {
-	        key: 'renderCalendarHeader',
-	        value: function renderCalendarHeader() {
-	            return days_name.map(function (day) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { className: 'calendar-row-content calendar-days-header', key: "calendar-days-header-" + day },
-	                    day
-	                );
+	            var newDisplayDate = (0, _moment2.default)(this.state.displayDate).add(1, 'M');
+	            this.setState({ displayDate: newDisplayDate }, function () {
+	                _this2.props.handleDateChange(_this2.state.displayDate);
 	            });
 	        }
 	    }, {
-	        key: 'renderBlankDays',
-	        value: function renderBlankDays() {
-	            var blankDays = [];
-	            var i = 0;
-	            while ((0, _DateUtils.getFirstDayOfMonth)(this.state.defaultDate, "ddd") != days_name[i]) {
-	                blankDays[i] = _react2.default.createElement('div', { className: 'calendar-row-content calendar-blank-days', key: "calendar-blank-days-" + i });
-	                i++;
-	            }
+	        key: 'subtractCalendar',
+	        value: function subtractCalendar() {
+	            var _this3 = this;
 
-	            return blankDays;
+	            var newDisplayDate = (0, _moment2.default)(this.state.displayDate).subtract(1, 'M');
+	            this.setState({ displayDate: newDisplayDate }, function () {
+	                _this3.props.handleDateChange(_this3.state.displayDate);
+	            });
 	        }
 	    }, {
-	        key: 'findEventsByDay',
-	        value: function findEventsByDay(events, dayNumber) {
+	        key: 'getNow',
+	        value: function getNow() {
+	            var _this4 = this;
 
-	            return events != undefined ? events.filter(function (event) {
-	                return (0, _moment2.default)(event.start.dateTime).dates() == dayNumber;
-	            }) : [];
-	        }
-	    }, {
-	        key: 'renderWeekRow',
-	        value: function renderWeekRow(initialDayNumber, blankDays) {
-
-	            var dayNumber = initialDayNumber;
-	            var counter = blankDays.length === 0 ? 0 : blankDays.length;
-
-	            for (var c = counter; c < 7; c++) {
-	                if (dayNumber > this.getDaysInMonth()) break;
-
-	                var eventsOfTheDay = this.findEventsByDay(this.props.events, dayNumber);
-
-	                blankDays.push(_react2.default.createElement(_CalendarColumn2.default, { defaultDate: this.state.defaultDate,
-	                    dayNumber: dayNumber,
-	                    events: eventsOfTheDay,
-	                    key: "calendar-days-" + dayNumber }));
-	                dayNumber++;
-	            }
-
-	            return { html: this.fillWithBlankDays(blankDays), newDayNumber: dayNumber };
-	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(newprops) {
-	            this.setState({ defaultDate: newprops.defaultDate });
+	            this.setState({ displayDate: (0, _moment2.default)() }, function () {
+	                _this4.handleDateChange(_this4.state.displayDate);
+	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 
-	            var calendarHeaderDays = this.renderCalendarHeader();
-	            var blankDays = this.renderBlankDays();
-	            var calendar = this.renderCalendar(blankDays);
+	            var date = this.state.displayDate;
 
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'calendar-month-view' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'calendar-row calendar-month-header' },
-	                        calendarHeaderDays
-	                    ),
-	                    calendar
-	                )
+	                _react2.default.createElement(_CalendarHeader2.default, { defaultDate: date,
+	                    increaseCalendar: this.increaseCalendar,
+	                    subtractCalendar: this.subtractCalendar,
+	                    getNow: this.getNow }),
+	                _react2.default.createElement(_Calendar2.default, { defaultDate: date, events: this.props.events })
 	            );
 	        }
 	    }]);
 
-	    return Calendar;
+	    return CalendarWrapper;
 	}(_react2.default.Component);
 
-	Calendar.propTypes = {
-	    events: _react2.default.PropTypes.array
+	CalendarWrapper.propTypes = {
+	    defaultDate: _react2.default.PropTypes.object,
+	    events: _react2.default.PropTypes.array.isRequired,
+	    handleDateChange: _react2.default.PropTypes.func.isRequired
 	};
 
-	Calendar.defaultProps = { defaultDate: (0, _moment2.default)() };
+	CalendarWrapper.defaultProps = {
+	    defaultDate: (0, _moment2.default)(),
+	    events: []
+	};
 
-	exports.default = Calendar;
+	exports.default = CalendarWrapper;
 
 /***/ },
 /* 242 */
@@ -57567,6 +57454,192 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(242);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _DateUtils = __webpack_require__(345);
+
+	var _CalendarColumn = __webpack_require__(346);
+
+	var _CalendarColumn2 = _interopRequireDefault(_CalendarColumn);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var days_name = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+	var Calendar = function (_React$Component) {
+	    _inherits(Calendar, _React$Component);
+
+	    function Calendar(props) {
+	        _classCallCheck(this, Calendar);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
+
+	        _this.state = {
+	            defaultDate: (0, _moment2.default)(_this.props.defaultDate)
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Calendar, [{
+	        key: 'getDayOfWeek',
+	        value: function getDayOfWeek() {
+	            return this.state.defaultDate.format("ddd");
+	        }
+	    }, {
+	        key: 'getDaysInMonth',
+	        value: function getDaysInMonth() {
+	            return this.state.defaultDate.daysInMonth();
+	        }
+	    }, {
+	        key: 'renderCalendar',
+	        value: function renderCalendar(blankDays) {
+
+	            var dayNumber = 1;
+	            var calendar = [];
+
+	            for (var c = 0; c < 6; c++) {
+
+	                if (dayNumber > this.getDaysInMonth()) break;
+
+	                var weekRow = this.renderWeekRow(dayNumber, blankDays);
+	                calendar.push(_react2.default.createElement(
+	                    'div',
+	                    { className: 'calendar-month-row', key: "calendar-row-" + c },
+	                    weekRow.html
+	                ));
+
+	                blankDays = [];
+	                dayNumber = weekRow.newDayNumber;
+	            }
+
+	            return calendar;
+	        }
+	    }, {
+	        key: 'fillWithBlankDays',
+	        value: function fillWithBlankDays(aRowOfDays) {
+
+	            while (aRowOfDays.length != 7) {
+	                aRowOfDays.push(_react2.default.createElement('div', { className: 'calendar-row-content calendar-blank-days', key: "calendar-blank-days-" + aRowOfDays.length }));
+	            }
+	            return aRowOfDays;
+	        }
+	    }, {
+	        key: 'renderCalendarHeader',
+	        value: function renderCalendarHeader() {
+	            return days_name.map(function (day) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'calendar-row-content calendar-days-header', key: "calendar-days-header-" + day },
+	                    day
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'renderBlankDays',
+	        value: function renderBlankDays() {
+	            var blankDays = [];
+	            var i = 0;
+	            while ((0, _DateUtils.getFirstDayOfMonth)(this.state.defaultDate, "ddd") != days_name[i]) {
+	                blankDays[i] = _react2.default.createElement('div', { className: 'calendar-row-content calendar-blank-days', key: "calendar-blank-days-" + i });
+	                i++;
+	            }
+
+	            return blankDays;
+	        }
+	    }, {
+	        key: 'findEventsByDay',
+	        value: function findEventsByDay(events, dayNumber) {
+
+	            return events != undefined ? events.filter(function (event) {
+	                return (0, _moment2.default)(event.start.dateTime).dates() == dayNumber;
+	            }) : [];
+	        }
+	    }, {
+	        key: 'renderWeekRow',
+	        value: function renderWeekRow(initialDayNumber, blankDays) {
+
+	            var dayNumber = initialDayNumber;
+	            var counter = blankDays.length === 0 ? 0 : blankDays.length;
+
+	            for (var c = counter; c < 7; c++) {
+	                if (dayNumber > this.getDaysInMonth()) break;
+
+	                var eventsOfTheDay = this.findEventsByDay(this.props.events, dayNumber);
+
+	                blankDays.push(_react2.default.createElement(_CalendarColumn2.default, { defaultDate: this.state.defaultDate,
+	                    dayNumber: dayNumber,
+	                    events: eventsOfTheDay,
+	                    key: "calendar-days-" + dayNumber }));
+	                dayNumber++;
+	            }
+
+	            return { html: this.fillWithBlankDays(blankDays), newDayNumber: dayNumber };
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(newprops) {
+	            this.setState({ defaultDate: newprops.defaultDate });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            var calendarHeaderDays = this.renderCalendarHeader();
+	            var blankDays = this.renderBlankDays();
+	            var calendar = this.renderCalendar(blankDays);
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'calendar-month-view' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'calendar-row calendar-month-header' },
+	                        calendarHeaderDays
+	                    ),
+	                    calendar
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Calendar;
+	}(_react2.default.Component);
+
+	Calendar.propTypes = {
+	    events: _react2.default.PropTypes.array
+	};
+
+	Calendar.defaultProps = { defaultDate: (0, _moment2.default)() };
+
+	exports.default = Calendar;
+
+/***/ },
+/* 345 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.getFirstDayOfMonth = getFirstDayOfMonth;
 
 	var _moment = __webpack_require__(242);
@@ -57585,7 +57658,7 @@
 	}
 
 /***/ },
-/* 345 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57604,15 +57677,15 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _slice = __webpack_require__(346);
+	var _slice = __webpack_require__(347);
 
 	var _slice2 = _interopRequireDefault(_slice);
 
-	var _concat = __webpack_require__(362);
+	var _concat = __webpack_require__(363);
 
 	var _concat2 = _interopRequireDefault(_concat);
 
-	var _CalendarUtils = __webpack_require__(373);
+	var _CalendarUtils = __webpack_require__(374);
 
 	var _reactRouter = __webpack_require__(169);
 
@@ -57660,11 +57733,9 @@
 	            if (events) {
 	                freeTime = (0, _CalendarUtils.computeFreeTime)((0, _moment2.default)(), events);
 	            }
-	            console.log("");
-
 	            return [_react2.default.createElement(
 	                'div',
-	                null,
+	                { key: 'freetime-' },
 	                freeTime
 	            )];
 	        }
@@ -57740,12 +57811,12 @@
 	exports.default = CalendarColumn;
 
 /***/ },
-/* 346 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSlice = __webpack_require__(347),
-	    isIterateeCall = __webpack_require__(348),
-	    toInteger = __webpack_require__(357);
+	var baseSlice = __webpack_require__(348),
+	    isIterateeCall = __webpack_require__(349),
+	    toInteger = __webpack_require__(358);
 
 	/**
 	 * Creates a slice of `array` from `start` up to, but not including, `end`.
@@ -57783,7 +57854,7 @@
 
 
 /***/ },
-/* 347 */
+/* 348 */
 /***/ function(module, exports) {
 
 	/**
@@ -57820,13 +57891,13 @@
 
 
 /***/ },
-/* 348 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var eq = __webpack_require__(349),
-	    isArrayLike = __webpack_require__(350),
-	    isIndex = __webpack_require__(356),
-	    isObject = __webpack_require__(354);
+	var eq = __webpack_require__(350),
+	    isArrayLike = __webpack_require__(351),
+	    isIndex = __webpack_require__(357),
+	    isObject = __webpack_require__(355);
 
 	/**
 	 * Checks if the given arguments are from an iteratee call.
@@ -57856,7 +57927,7 @@
 
 
 /***/ },
-/* 349 */
+/* 350 */
 /***/ function(module, exports) {
 
 	/**
@@ -57899,12 +57970,12 @@
 
 
 /***/ },
-/* 350 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(351),
-	    isFunction = __webpack_require__(353),
-	    isLength = __webpack_require__(355);
+	var getLength = __webpack_require__(352),
+	    isFunction = __webpack_require__(354),
+	    isLength = __webpack_require__(356);
 
 	/**
 	 * Checks if `value` is array-like. A value is considered array-like if it's
@@ -57939,10 +58010,10 @@
 
 
 /***/ },
-/* 351 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(352);
+	var baseProperty = __webpack_require__(353);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -57961,7 +58032,7 @@
 
 
 /***/ },
-/* 352 */
+/* 353 */
 /***/ function(module, exports) {
 
 	/**
@@ -57981,10 +58052,10 @@
 
 
 /***/ },
-/* 353 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(354);
+	var isObject = __webpack_require__(355);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]',
@@ -58029,7 +58100,7 @@
 
 
 /***/ },
-/* 354 */
+/* 355 */
 /***/ function(module, exports) {
 
 	/**
@@ -58066,7 +58137,7 @@
 
 
 /***/ },
-/* 355 */
+/* 356 */
 /***/ function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -58108,7 +58179,7 @@
 
 
 /***/ },
-/* 356 */
+/* 357 */
 /***/ function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -58136,10 +58207,10 @@
 
 
 /***/ },
-/* 357 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toFinite = __webpack_require__(358);
+	var toFinite = __webpack_require__(359);
 
 	/**
 	 * Converts `value` to an integer.
@@ -58178,10 +58249,10 @@
 
 
 /***/ },
-/* 358 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toNumber = __webpack_require__(359);
+	var toNumber = __webpack_require__(360);
 
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0,
@@ -58226,12 +58297,12 @@
 
 
 /***/ },
-/* 359 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(353),
-	    isObject = __webpack_require__(354),
-	    isSymbol = __webpack_require__(360);
+	var isFunction = __webpack_require__(354),
+	    isObject = __webpack_require__(355),
+	    isSymbol = __webpack_require__(361);
 
 	/** Used as references for various `Number` constants. */
 	var NAN = 0 / 0;
@@ -58299,10 +58370,10 @@
 
 
 /***/ },
-/* 360 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(361);
+	var isObjectLike = __webpack_require__(362);
 
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -58343,7 +58414,7 @@
 
 
 /***/ },
-/* 361 */
+/* 362 */
 /***/ function(module, exports) {
 
 	/**
@@ -58378,13 +58449,13 @@
 
 
 /***/ },
-/* 362 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(363),
-	    baseFlatten = __webpack_require__(364),
-	    copyArray = __webpack_require__(372),
-	    isArray = __webpack_require__(371);
+	var arrayPush = __webpack_require__(364),
+	    baseFlatten = __webpack_require__(365),
+	    copyArray = __webpack_require__(373),
+	    isArray = __webpack_require__(372);
 
 	/**
 	 * Creates a new array concatenating `array` with any additional arrays
@@ -58426,7 +58497,7 @@
 
 
 /***/ },
-/* 363 */
+/* 364 */
 /***/ function(module, exports) {
 
 	/**
@@ -58452,11 +58523,11 @@
 
 
 /***/ },
-/* 364 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(363),
-	    isFlattenable = __webpack_require__(365);
+	var arrayPush = __webpack_require__(364),
+	    isFlattenable = __webpack_require__(366);
 
 	/**
 	 * The base implementation of `_.flatten` with support for restricting flattening.
@@ -58496,12 +58567,12 @@
 
 
 /***/ },
-/* 365 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(366),
-	    isArguments = __webpack_require__(369),
-	    isArray = __webpack_require__(371);
+	var Symbol = __webpack_require__(367),
+	    isArguments = __webpack_require__(370),
+	    isArray = __webpack_require__(372);
 
 	/** Built-in value references. */
 	var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -58522,10 +58593,10 @@
 
 
 /***/ },
-/* 366 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(367);
+	var root = __webpack_require__(368);
 
 	/** Built-in value references. */
 	var Symbol = root.Symbol;
@@ -58534,10 +58605,10 @@
 
 
 /***/ },
-/* 367 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(368);
+	var freeGlobal = __webpack_require__(369);
 
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -58549,7 +58620,7 @@
 
 
 /***/ },
-/* 368 */
+/* 369 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -58560,10 +58631,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 369 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLikeObject = __webpack_require__(370);
+	var isArrayLikeObject = __webpack_require__(371);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]';
@@ -58612,11 +58683,11 @@
 
 
 /***/ },
-/* 370 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(350),
-	    isObjectLike = __webpack_require__(361);
+	var isArrayLike = __webpack_require__(351),
+	    isObjectLike = __webpack_require__(362);
 
 	/**
 	 * This method is like `_.isArrayLike` except that it also checks if `value`
@@ -58651,7 +58722,7 @@
 
 
 /***/ },
-/* 371 */
+/* 372 */
 /***/ function(module, exports) {
 
 	/**
@@ -58683,7 +58754,7 @@
 
 
 /***/ },
-/* 372 */
+/* 373 */
 /***/ function(module, exports) {
 
 	/**
@@ -58709,7 +58780,7 @@
 
 
 /***/ },
-/* 373 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58741,12 +58812,10 @@
 	    });
 
 	    if (remainingWorkHours > 5 * 60) {
-	        return "free";
+	        return "";
 	    } else if (remainingWorkHours <= 0) {
-	        console.log("FULLY BOOKED");
 	        return "FULLY BOOKED";
 	    } else {
-	        console.log("please call");
 	        return "please call";
 	    }
 	}
@@ -58756,16 +58825,160 @@
 	}
 
 /***/ },
-/* 374 */
+/* 375 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(242);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _reactRouter = __webpack_require__(169);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CalendarHeader = function (_React$Component) {
+	    _inherits(CalendarHeader, _React$Component);
+
+	    function CalendarHeader(props) {
+	        _classCallCheck(this, CalendarHeader);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CalendarHeader).call(this, props));
+
+	        _this.state = {
+	            defaultDate: (0, _moment2.default)(_this.props.defaultDate)
+	        };
+	        return _this;
+	    }
+
+	    _createClass(CalendarHeader, [{
+	        key: 'increaseCalendar',
+	        value: function increaseCalendar() {
+	            this.props.increaseCalendar();
+	        }
+	    }, {
+	        key: 'subtractCalendar',
+	        value: function subtractCalendar() {
+	            this.props.subtractCalendar();
+	        }
+	    }, {
+	        key: 'getNow',
+	        value: function getNow() {
+	            this.props.getNow();
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(newprops) {
+	            this.setState({ defaultDate: (0, _moment2.default)(newprops.defaultDate) });
+	        }
+	    }, {
+	        key: 'goToAddEventPage',
+	        value: function goToAddEventPage() {
+	            this.context.router.push("/admin/event/create");
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            var date = (0, _moment2.default)(this.state.defaultDate).format("MMMM YYYY");
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: '' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'sub-bar' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-md-6 col-md-offset-2 col-sm-6 col-xs-6' },
+	                        _react2.default.createElement(
+	                            'h3',
+	                            { className: 'calendar-title' },
+	                            date
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { id: 'authorize-div', className: 'btn-group', role: 'group' },
+	                            _react2.default.createElement(
+	                                _reactRouter.Link,
+	                                { to: '/admin/event/create' },
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { type: 'button', className: 'btn btn-primary' },
+	                                    'Add Event'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'btn-group', role: 'group' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', onClick: this.subtractCalendar.bind(this) },
+	                                _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
+	                            ),
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', onClick: this.getNow.bind(this) },
+	                                'Today'
+	                            ),
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', onClick: this.increaseCalendar.bind(this) },
+	                                _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return CalendarHeader;
+	}(_react2.default.Component);
+
+	CalendarHeader.contextTypes = {
+	    router: _react2.default.PropTypes.object.isRequired
+	};
+
+	exports.default = CalendarHeader;
+
+/***/ },
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(375);
+	var content = __webpack_require__(377);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(377)(content, {});
+	var update = __webpack_require__(379)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -58782,10 +58995,10 @@
 	}
 
 /***/ },
-/* 375 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(376)();
+	exports = module.exports = __webpack_require__(378)();
 	// imports
 
 
@@ -58796,7 +59009,7 @@
 
 
 /***/ },
-/* 376 */
+/* 378 */
 /***/ function(module, exports) {
 
 	/*
@@ -58852,7 +59065,7 @@
 
 
 /***/ },
-/* 377 */
+/* 379 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -59104,151 +59317,7 @@
 
 
 /***/ },
-/* 378 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _moment = __webpack_require__(242);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _reactRouter = __webpack_require__(169);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CalendarHeader = function (_React$Component) {
-	    _inherits(CalendarHeader, _React$Component);
-
-	    function CalendarHeader(props) {
-	        _classCallCheck(this, CalendarHeader);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CalendarHeader).call(this, props));
-
-	        _this.state = {
-	            defaultDate: (0, _moment2.default)(_this.props.defaultDate)
-	        };
-	        return _this;
-	    }
-
-	    _createClass(CalendarHeader, [{
-	        key: 'increaseCalendar',
-	        value: function increaseCalendar() {
-	            this.props.increaseCalendar();
-	        }
-	    }, {
-	        key: 'subtractCalendar',
-	        value: function subtractCalendar() {
-	            this.props.subtractCalendar();
-	        }
-	    }, {
-	        key: 'getNow',
-	        value: function getNow() {
-	            this.props.getNow();
-	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(newprops) {
-	            this.setState({ defaultDate: (0, _moment2.default)(newprops.defaultDate) });
-	        }
-	    }, {
-	        key: 'goToAddEventPage',
-	        value: function goToAddEventPage() {
-	            this.context.router.push("/admin/event/create");
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            var date = (0, _moment2.default)(this.state.defaultDate).format("MMMM YYYY");
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: '' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'sub-bar' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-md-6 col-md-offset-2 col-sm-6 col-xs-6' },
-	                        _react2.default.createElement(
-	                            'h3',
-	                            { className: 'calendar-title' },
-	                            date
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'mobile-hide center sub-bar-component-centered col-md-1 col-sm-2 col-xs-5' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { id: 'authorize-div', className: 'btn-group', role: 'group' },
-	                            _react2.default.createElement(
-	                                _reactRouter.Link,
-	                                { to: '/admin/event/create' },
-	                                _react2.default.createElement(
-	                                    'button',
-	                                    { type: 'button', className: 'btn btn-primary' },
-	                                    'Add Event'
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'btn-group', role: 'group' },
-	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'button', className: 'btn btn-default', onClick: this.subtractCalendar.bind(this) },
-	                                _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
-	                            ),
-	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'button', className: 'btn btn-default', onClick: this.getNow.bind(this) },
-	                                'Today'
-	                            ),
-	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'button', className: 'btn btn-default', onClick: this.increaseCalendar.bind(this) },
-	                                _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
-	                            )
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return CalendarHeader;
-	}(_react2.default.Component);
-
-	CalendarHeader.contextTypes = {
-	    router: _react2.default.PropTypes.object.isRequired
-	};
-
-	exports.default = CalendarHeader;
-
-/***/ },
-/* 379 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59289,7 +59358,7 @@
 
 	exports.useBasename = _useBasename3['default'];
 
-	var _useBeforeUnload2 = __webpack_require__(380);
+	var _useBeforeUnload2 = __webpack_require__(381);
 
 	var _useBeforeUnload3 = _interopRequireDefault(_useBeforeUnload2);
 
@@ -59309,13 +59378,13 @@
 
 	// deprecated
 
-	var _enableBeforeUnload2 = __webpack_require__(381);
+	var _enableBeforeUnload2 = __webpack_require__(382);
 
 	var _enableBeforeUnload3 = _interopRequireDefault(_enableBeforeUnload2);
 
 	exports.enableBeforeUnload = _enableBeforeUnload3['default'];
 
-	var _enableQueries2 = __webpack_require__(382);
+	var _enableQueries2 = __webpack_require__(383);
 
 	var _enableQueries3 = _interopRequireDefault(_enableQueries2);
 
@@ -59324,7 +59393,7 @@
 	exports.createLocation = createLocation;
 
 /***/ },
-/* 380 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59441,7 +59510,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 381 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59454,7 +59523,7 @@
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
-	var _useBeforeUnload = __webpack_require__(380);
+	var _useBeforeUnload = __webpack_require__(381);
 
 	var _useBeforeUnload2 = _interopRequireDefault(_useBeforeUnload);
 
@@ -59462,7 +59531,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 382 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

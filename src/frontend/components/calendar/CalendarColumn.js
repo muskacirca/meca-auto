@@ -34,9 +34,7 @@ class CalendarColumn extends React.Component {
         if(events) {
             freeTime = computeFreeTime(moment(), events);
         }
-        console.log("");
-        
-        return [<div>{freeTime}</div>]
+        return [<div key="freetime-">{freeTime}</div>]
     }
 
     handleEventBadgeClick() {

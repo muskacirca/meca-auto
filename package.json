@@ -38,6 +38,7 @@
     "moment": "^2.11.2",
     "node-sass": "^3.8.0",
     "nodemon": "^1.9.2",
+    "react-addons-test-utils": "^15.3.0",
     "react-autosuggest": "^3.5.0",
     "react-scroll": "^1.0.17",
     "sass-loader": "^4.0.0",

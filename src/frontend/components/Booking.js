@@ -1,8 +1,7 @@
 'use strict'
 
 import React from 'react'
-import Calendar from './calendar/Calendar'
-import CalendarHeader from './calendar/CalendarHeader'
+import Calendar from './calendar/CalendarWrapper'
 import moment from 'moment'
 
 import {
@@ -22,7 +21,7 @@ class Booking extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.checkAuth()
     }
 
@@ -30,7 +29,6 @@ class Booking extends React.Component {
      * Check if current user has authorized this application.
      */
     checkAuth() {
-        console.log("checkAuth");
         gapi.auth.authorize(
             {
                 'client_id': CLIENT_ID,
@@ -45,8 +43,6 @@ class Booking extends React.Component {
      * @param {Object} authResult Authorization result.
      */
     handleAuthResult(authResult) {
-
-        console.log("handle auth result");
 
         let authorizeDiv = document.getElementById('authorize-div');
         if (authResult && !authResult.error) {
@@ -77,7 +73,6 @@ class Booking extends React.Component {
      * once client library is loaded.
      */
     loadCalendarApi() {
-        console.log("loaCalendarapi");
         gapi.client.load('calendar', 'v3', this.listUpcomingEvents.bind(this));
     }
 
@@ -86,9 +81,9 @@ class Booking extends React.Component {
      * the authorized user's calendar. If no events are found an
      * appropriate message is printed.
      */
-    listUpcomingEvents() {
+    listUpcomingEvents(date) {
         
-        let dateMin = getFirstDayOfMonth(this.state.displayDate);
+        let dateMin = getFirstDayOfMonth(date);
         let dateMax = moment(dateMin).add(1, 'M');
         
         var request = gapi.client.calendar.events.list({
@@ -103,40 +98,16 @@ class Booking extends React.Component {
 
         request.execute((resp) => {
             var events = resp.items;
-            console.log("events : " + JSON.stringify(events));
 
             this.setState({events: events})
 
         });
     }
-
-    increaseCalendar() {
-
-        let newDisplayDate = moment(this.state.displayDate).add(1, 'M');
-        this.setState({displayDate: newDisplayDate}, () => {this.listUpcomingEvents()})
-    }
-
-    subtractCalendar() {
-
-        let newDisplayDate = moment(this.state.displayDate).subtract(1, 'M');
-        this.setState({displayDate: newDisplayDate}, () => {this.listUpcomingEvents()})
-    }
-
-    getNow() {
-        this.setState({displayDate: moment()}, () => {this.listUpcomingEvents()})
-    }
-
+    
     render() {
-
-        let date = this.state.displayDate;
-
+        
         return  <div>
-                    <CalendarHeader defaultDate={date}
-                            increaseCalendar={this.increaseCalendar.bind(this)}
-                            subtractCalendar={this.subtractCalendar.bind(this)}
-                            getNow={this.getNow.bind(this)} />
-                
-                        <Calendar defaultDate={this.state.displayDate} events={this.state.events}/>
+                    <Calendar events={this.state.events} handleDateChange={this.listUpcomingEvents.bind(this)} />
                 </div>
     }
 }

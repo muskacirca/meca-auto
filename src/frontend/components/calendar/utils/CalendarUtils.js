@@ -16,12 +16,10 @@ export function computeFreeTime(dateOfTheDay, events) {
     });
     
     if (remainingWorkHours > 5 * 60) {
-        return "free"
+        return ""
     } else if(remainingWorkHours <= 0) {
-        console.log("FULLY BOOKED");
         return "FULLY BOOKED"
     } else {
-        console.log("please call");
         return "please call"
     }
 }

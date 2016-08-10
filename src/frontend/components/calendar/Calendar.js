@@ -8,7 +8,6 @@ import {
 const days_name = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
 import CalendarColumn from './CalendarColumn'
-require('./calendar-style.scss');
 
 class Calendar extends React.Component {
 
