@@ -71,6 +71,6 @@ describe('Calendar', () => {
             }];
 
 
-        expect(computeFreeTime(moment(), events)).toBe("free")
+        expect(computeFreeTime(moment(), events)).toBe("")
     })
 });
