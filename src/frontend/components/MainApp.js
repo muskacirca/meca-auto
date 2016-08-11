@@ -30,12 +30,21 @@ class MainApp extends React.Component{
 
     }
 
+    getDocHeight() {
+        let D = document;
+        return Math.max(
+            D.body.scrollHeight, D.documentElement.scrollHeight,
+            D.body.offsetHeight, D.documentElement.offsetHeight,
+            D.body.clientHeight, D.documentElement.clientHeight
+        );
+    }
+
     handleScroll(e) {
 
 
-        let scrollTop = /* work on Chrome and Firefox */ window.scrollY;
-
-        if(scrollTop > 151) {
+        let scrollTop = window.scrollY;//this.getDocHeight();
+        console.log("scrollTop : " + JSON.stringify(scrollTop));
+        if(scrollTop > 152) {
             // console.log("scrollingg height " + scrollTop);
             this.setState({isNavbarFixed: true})
         } else if(scrollTop < 151) {
@@ -50,14 +59,14 @@ class MainApp extends React.Component{
 
         return (
             <div className="site-pusher">
-                <div id="logo-row">
+                <div id="logo-row" className="mobile-hide">
                     <div className="col-md-6 col-md-offset-3 center">
                         <img src="style/images/mpa/mpa-logo.png" className="img-responsive" />
                         <span>Téléphone : 01 64 41 80 97 | 39 avenue de Fontainebleau 77310 PRINGY</span>
                     </div>
                 </div>
                 <NavBar fix={yo}/>
-                <div className="container-fluid">
+                <div className="site-content">
                     {this.props.children}
                     <footer className="footer">Footer</footer>
                 </div>

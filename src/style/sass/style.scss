@@ -207,12 +207,15 @@ header.header.fixed {
   padding-right: 20px;
 }
 
+.mobile-only{ display: none; }
+
 /*
     RESPONSIVE
 */
 
 @media only screen and (max-width: 750px) {
 
+  #app {overflow: hidden}
   .header {position: static;}
   .site-content {
     position: absolute;
@@ -240,6 +243,10 @@ header.header.fixed {
 
     width: 50px;
     height: 66px;
+  }
+
+  header.header.fixed {
+    position: fixed;
   }
 
   .header__icon:after {
@@ -291,7 +298,10 @@ header.header.fixed {
     background-color: rgba(0,0,0,0.6);
   }
 
+  a.mobile-hide,
   .mobile-hide{ display: none; }
+
+  .mobile-only{ display: inherit; }
 
   .__right {
     padding-right: 5em;

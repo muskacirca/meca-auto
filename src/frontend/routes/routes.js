@@ -11,9 +11,7 @@ export default  <Route>
 
                         <IndexRoute component={Home} />
                         <Route path="/contact" component={Contact} />
-                        <Route path="/repair" component={Home} />
-                        <Route path="/care" component={Home} />
-                        <Route path="/stock" component={Home} />
+                        <Route path="/services" component={Home} />
                         <Route path="/booking" component={Booking} />
                     </Route>
 

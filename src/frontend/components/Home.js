@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import Scrollchor from 'react-scrollchor';
+
 class Home extends React.Component {
 
     constructor(props) {
@@ -12,7 +14,7 @@ class Home extends React.Component {
         return  <div className="site-container">
                     <div id="repair" className="div1 row anchor">
                         <div className="col-md-6 img-presentation">
-                            
+
                         </div>
                         <div className="col-md-6 text-presentation __right">
                             <h1>Réparation</h1>
@@ -23,7 +25,7 @@ class Home extends React.Component {
                         </div>
                     </div>
                     <div id="care" className="div2 row anchor">
-                       
+
                         <div className="col-md-6 col-sm-6 col-sm-push-6 col-md-push-6">
                             <div className="img-presentation"/>
                         </div>
