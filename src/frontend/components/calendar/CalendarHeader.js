@@ -58,11 +58,11 @@ class CalendarHeader extends React.Component {
                         <div className="center sub-bar-component-centered col-md-2 col-sm-3 col-xs-5">
                             <div className="btn-group" role="group">
                                 <button type="button" className="btn btn-default" onClick={this.subtractCalendar.bind(this)}>
-                                    <i className="fa fa-chevron-left" />
+                                    <i className="fa fa-chevron-left" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" className="btn btn-default" onClick={this.getNow.bind(this)}>Today</button>
                                 <button type="button" className="btn btn-default" onClick={this.increaseCalendar.bind(this)}>
-                                    <i className="fa fa-chevron-right"/>
+                                    <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>

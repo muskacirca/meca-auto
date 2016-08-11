@@ -60066,7 +60066,7 @@
 	                            _react2.default.createElement(
 	                                'button',
 	                                { type: 'button', className: 'btn btn-default', onClick: this.subtractCalendar.bind(this) },
-	                                _react2.default.createElement('i', { className: 'fa fa-chevron-left' })
+	                                _react2.default.createElement('i', { className: 'fa fa-chevron-left', 'aria-hidden': 'true' })
 	                            ),
 	                            _react2.default.createElement(
 	                                'button',
@@ -60076,7 +60076,7 @@
 	                            _react2.default.createElement(
 	                                'button',
 	                                { type: 'button', className: 'btn btn-default', onClick: this.increaseCalendar.bind(this) },
-	                                _react2.default.createElement('i', { className: 'fa fa-chevron-right' })
+	                                _react2.default.createElement('i', { className: 'fa fa-chevron-right', 'aria-hidden': 'true' })
 	                            )
 	                        )
 	                    )
@@ -60137,7 +60137,7 @@
 
 
 	// module
-	exports.push([module.id, "/*\n  CALENDAR\n*/\n.calendar-title {\n  padding-left: 2em; }\n\n.calendar-month-header {\n  display: flex;\n  justify-content: space-around; }\n\n.calendar-month-row {\n  display: flex;\n  justify-content: space-around; }\n\n.calendar-week-row {\n  display: flex;\n  justify-content: space-around; }\n\n.calendar-row-content {\n  flex: 1; }\n\n.calendar-days-content {\n  min-height: 135px; }\n  .calendar-days-content li {\n    list-style-type: none; }\n  .calendar-days-content ul {\n    padding-left: 10px; }\n\n.center {\n  text-align: center; }\n\n.calendar-days-header,\n.calendar-blank-days,\n.calendar-days {\n  border: 1px solid #90A4AE; }\n\n.calendar-blank-days,\n.calendar-days {\n  height: 115px; }\n\n.calendar-days-tr-up {\n  padding-right: 5px; }\n\n.calendar-days-header {\n  text-align: center;\n  font-size: medium;\n  padding: 5px; }\n\n.calendar-days-tr-up {\n  text-align: right; }\n\n.calendar-days-tr-up {\n  font-weight: bold;\n  font-size: 1.5em; }\n\n.calendar-container .page-content {\n  margin-right: 0px !important;\n  margin-left: 0px !important; }\n\n.calendar-event-count-wrapper {\n  position: absolute;\n  min-height: 75px; }\n\n.calendar-event-count {\n  position: absolute;\n  bottom: 0;\n  padding: 0.5em; }\n\n.calendar-event-plus-wrapper {\n  position: relative; }\n\n.calendar-event-plus {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  /* left: 15em; */\n  padding: 0.5em; }\n\n/*\n  END OF CALENDAR\n*/\n", ""]);
+	exports.push([module.id, "/*\n  CALENDAR\n*/\n.calendar-title {\n  padding-left: 2em; }\n\n.calendar-month-header {\n  display: flex;\n  justify-content: space-around; }\n\n.calendar-month-row {\n  display: flex;\n  justify-content: space-around; }\n\n.calendar-row-content {\n  flex: 1; }\n\n.calendar-days-content {\n  min-height: 135px; }\n  .calendar-days-content li {\n    list-style-type: none; }\n  .calendar-days-content ul {\n    padding-left: 10px; }\n\n.center {\n  text-align: center; }\n\n.calendar-days-header,\n.calendar-blank-days,\n.calendar-days {\n  border: 1px solid #90A4AE; }\n\n.calendar-blank-days,\n.calendar-days {\n  height: 115px; }\n\n.calendar-days-tr-up {\n  padding-right: 5px; }\n\n.calendar-days-header {\n  text-align: center;\n  font-size: medium;\n  padding: 5px; }\n\n.calendar-days-tr-up {\n  text-align: right; }\n\n.calendar-days-tr-up {\n  font-weight: bold;\n  font-size: 1.5em; }\n\n.calendar-container .page-content {\n  margin-right: 0px !important;\n  margin-left: 0px !important; }\n\n.calendar-event-count-wrapper {\n  position: absolute;\n  min-height: 75px; }\n\n.calendar-event-count {\n  position: absolute;\n  bottom: 0;\n  padding: 0.5em; }\n\n.calendar-event-plus-wrapper {\n  position: relative; }\n\n.calendar-event-plus {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  /* left: 15em; */\n  padding: 0.5em; }\n\n/*\n  END OF CALENDAR\n*/\n/* WEEK VIEW */\n.calendar-week-row {\n  display: flex;\n  justify-content: space-around; }\n  .calendar-week-row .calendar-blank-days,\n  .calendar-week-row .calendar-days {\n    height: auto; }\n", ""]);
 
 	// exports
 
