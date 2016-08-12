@@ -31,7 +31,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "fs": "0.0.2",
-    "jest-cli": "^14.1.1",
+    "jest-cli": "^14.1.0",
     "jest-react-native": "^14.1.2",
     "json": "^9.0.3",
     "json-loader": "^0.5.4",

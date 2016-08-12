@@ -1,0 +1,29 @@
+exports[`Navbar Displays well 1`] = `
+<header
+  className="header undefined">
+  <a
+    className="header__icon"
+    href="#"
+    id="header__icon"
+    onClick={[Function bound handleClick]} />
+  <nav
+    className="menu">
+    <a
+      className=""
+      onClick={[Function bound handleClick]}
+      style={Object {}}>
+      Services
+    </a>
+    <a
+      onClick={[Function bound handleClick]}
+      style={Object {}}>
+      Booking
+    </a>
+    <a
+      onClick={[Function bound handleClick]}
+      style={Object {}}>
+      Contact et Plans d\'accès
+    </a>
+  </nav>
+</header>
+`;
